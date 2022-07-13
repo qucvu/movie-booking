@@ -12,12 +12,12 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use((config) => {
   //config là nội dung của request
   //ta có thể thay đổi nội dung của request trước khi gửi lên sever
-  if (config.headers) {
-    const { accessToken = "" } = store.getState().authSlice.user || {};
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
-    }
-  }
+  // if (config.headers) {
+  //   const { accessToken = "" } = store.getState().authSlice.user || {};
+  //   if (accessToken) {
+  //     config.headers.Authorization = `Bearer ${accessToken}`;
+  //   }
+  // }
   return config;
 });
 
