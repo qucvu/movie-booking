@@ -7,7 +7,7 @@ import {
   Box,
   CardActions,
 } from "@mui/material";
-import { Movie } from "Interfaces/Movie";
+import { Movie } from "Interfaces/movieInterfaces";
 import {
   ButtonDetail,
   ButtonPlay,
@@ -19,7 +19,7 @@ import {
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import { useState } from "react";
 
-import TrailerModal from "./TrailerModal";
+import TrailerModal from "../TrailerModal";
 type Props = {
   movie: Movie;
 };

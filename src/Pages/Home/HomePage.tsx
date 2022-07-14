@@ -1,9 +1,9 @@
 import Header from "Components/Header/Header";
 import { Fragment } from "react";
 import AppDesc from "./AppDesc/AppDesc";
-import Banner from "./Banner";
+import Banner from "./Banner/Banner";
 import Footer from "./Footer/Footer";
-import MovieShowing from "./MovieShowing";
+import MovieShowing from "./MovieShowing/MovieShowing";
 
 type Props = {};
 
