@@ -1,3 +1,9 @@
+export interface Banner {
+  maBanner: number;
+  maPhim: string;
+  hinhAnh: string;
+}
+
 export interface Movie {
   maPhim: number;
   tenPhim: string;

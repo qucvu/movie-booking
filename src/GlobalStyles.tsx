@@ -1,7 +1,35 @@
+import { createTheme } from "@mui/material";
 import { createGlobalStyle } from "styled-components";
 
+export const theme = createTheme({
+  palette: {
+    primary: {
+      light: "#484848",
+      main: "#212121",
+      dark: "#000000",
+      contrastText: "#fff",
+    },
+    secondary: {
+      light: "#ffc246",
+      main: "#ff9100",
+      dark: "#c56200",
+      contrastText: "#000",
+    },
+  },
+});
 const GlobalStyles = createGlobalStyle`
-    
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif !important;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
 `;
 
 export default GlobalStyles;
