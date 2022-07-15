@@ -18,11 +18,18 @@ export const theme = createTheme({
   },
 });
 const GlobalStyles = createGlobalStyle`
-    body{
-    margin:0;
-    padding:0;
-    font-size: 16px;
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif !important;
 }
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
 `;
 
 export default GlobalStyles;

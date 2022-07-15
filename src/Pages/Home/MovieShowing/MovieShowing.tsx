@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "configStore";
 import { getMovieShowing } from "Slices/movieSlice";
 import Slider from "react-slick";
-import MovieShowingItem from "./MovieShowingItem";
 import { Settings } from "Interfaces/slickInterfaces";
-import TabPanel from "./TabPanel";
+import TabPanel from "../TabPanel";
 import LoadingAPI from "Components/LoadingAPI/LoadingAPI";
 import ErrorAPI from "Components/ErrorAPI/ErrorAPI";
+import MovieShowingItem from "./MovieShowingItem";
 
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
@@ -42,7 +42,7 @@ export default function BasicTabs() {
     arrows: false,
     infinite: true,
     speed: 1000,
-    // autoplay: true,
+    autoplay: true,
     slidesToShow: 4,
     slidesToScroll: 4,
     rows: 2,
@@ -74,7 +74,7 @@ export default function BasicTabs() {
   };
 
   return (
-    <Container sx={{ mt: 5 }}>
+    <Container sx={{ my: 5 }}>
       <Box sx={{ width: "100%" }}>
         <Box>
           <Tabs value={value} onChange={handleChange} centered>

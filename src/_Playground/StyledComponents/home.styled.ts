@@ -33,9 +33,39 @@ export const TrailerModalBox = styled.div`
   transform: translate(-50%, -50%);
   width: 800px;
 `;
-
+//HEADER
+export const HeaderAside = styled(Menu)`
+  background-color: rgba(0, 0, 0, 0.5);
+  & > div {
+    top: -2rem !important;
+    left: 0 !important;
+  }
+  ul {
+    background-color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 65%;
+    max-width: 400px;
+    margin: 0;
+    padding: 0;
+    li {
+      padding: 2rem;
+      &:hover {
+        background-color: ${theme.palette.secondary.dark};
+        color: white;
+      }
+    }
+    li:first-child {
+      background-color: ${theme.palette.secondary.dark};
+      height: 30%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+`;
 //BANNER
-
 export const BannerBox = styled.div`
   padding-top: 50%;
   background-size: 100% 100%;
@@ -96,35 +126,5 @@ export const CardBox = styled(Box)`
   }
   & ${ButtonPlay} {
     top: calc(50% - 40px);
-  }
-`;
-
-export const HeaderAside = styled(Menu)`
-  background-color: rgba(0, 0, 0, 0.5);
-  & > div {
-    ul {
-      background-color: white;
-      position: fixed;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      width: 65%;
-      max-width: 400px;
-      margin: 0;
-      padding: 0;
-      li {
-        padding: 2rem 1rem;
-        &:hover {
-          background-color: ${theme.palette.secondary.dark};
-          color: white;
-        }
-      }
-      li:first-child {
-        background-color: ${theme.palette.secondary.dark};
-        height: 30%;
-        display: flex;
-        justify-content: center;
-      }
-    }
   }
 `;

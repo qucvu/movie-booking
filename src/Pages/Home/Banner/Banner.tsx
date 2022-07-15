@@ -14,8 +14,8 @@ import CustomNextArrow from "Components/CustomSlick/CustomNextArrow";
 import CustomPrevArrow from "Components/CustomSlick/CustomPrevArrow";
 import CustomDots from "Components/CustomSlick/CustomDots";
 import { Settings } from "Interfaces/slickInterfaces";
-import TrailerModal from "./TrailerModal";
 import ErrorAPI from "Components/ErrorAPI/ErrorAPI";
+import TrailerModal from "../TrailerModal";
 
 const Banner = () => {
   const [open, setOpen] = useState(false);
@@ -55,7 +55,7 @@ const Banner = () => {
     arrows: true,
     infinite: true,
     speed: 1000,
-    // autoplay: true,
+    autoplay: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     nextArrow: <CustomNextArrow />,

@@ -145,7 +145,7 @@ const FooterCommon = (props: Props) => {
                 underline="none"
                 mb={1}
               >
-                <FacebookIcon />
+                <FacebookIcon color="info" />
                 <TextContact>Vũ</TextContact>
               </Link>
               <Link
@@ -155,7 +155,7 @@ const FooterCommon = (props: Props) => {
                 underline="none"
                 mb={1}
               >
-                <FacebookIcon />
+                <FacebookIcon color="info" />
                 <TextContact>Dũng</TextContact>
               </Link>
             </Box>

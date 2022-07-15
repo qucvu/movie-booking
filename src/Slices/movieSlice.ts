@@ -1,5 +1,4 @@
-import { Movie } from "./../Interfaces/Movie";
-import { Banner } from "Interfaces/movieInterfaces";
+import { Banner, Movie } from "Interfaces/movieInterfaces";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import movieAPI from "Services/movieAPI";
 

@@ -7,7 +7,6 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  Menu,
   Avatar,
   Button,
   Tooltip,
@@ -158,8 +157,7 @@ const Header = (props: Props) => {
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
+              <HeaderAside
                 id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{
@@ -174,12 +172,15 @@ const Header = (props: Props) => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
+                <MenuItem>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </MenuItem>
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
-              </Menu>
+              </HeaderAside>
             </Box>
           </Toolbar>
         </Container>
