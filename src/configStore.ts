@@ -4,6 +4,7 @@ import cinema from "Slices/cinemaSlice";
 const store = configureStore({
   reducer: {
     movieSlice,
+
     cinema,
   },
 });
