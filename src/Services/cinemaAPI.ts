@@ -1,8 +1,16 @@
 import axiosClient from "Services/axiosClient";
-import { Cinema } from "Interfaces/Cinema";
+import { CinemaSystem } from "Interfaces/Cinema";
 const CinemaAPI = {
-  getCinemaShowing: () => {
-    return axiosClient.get<Cinema[]>("QuanLyRap/LayThongTinHeThongRap");
+  getCinemaSystem: (cinemaId?: string) => {
+    return axiosClient.get<CinemaSystem[]>(
+      "QuanLyRap/LayThongTinLichChieuHeThongRap",
+      {
+        params: {
+          maHeThongRap: cinemaId,
+          maNhom: "GP01",
+        },
+      }
+    );
   },
 };
 
