@@ -5,7 +5,7 @@ import { Box, Container, Paper, Tab, Tabs } from "@mui/material";
 import { getCinemaSystem } from "Slices/cinemaSlice";
 import { TabPanel, a11yProps } from "Pages/Home/CinemaSystem/Tabs";
 import styled from "@emotion/styled";
-import ShowTimesFlims from "./ShowTimesFlims";
+import CinemaTimes from "./CinemaTimes";
 
 type Props = {};
 
@@ -101,7 +101,7 @@ const CinemaSystem = (props: Props) => {
                 value={value}
                 index={index}
               >
-                <ShowTimesFlims listCinema={cinema.lstCumRap} />
+                <CinemaTimes listCinema={cinema.lstCumRap} />
               </StyledTabPanel>
             );
           })}

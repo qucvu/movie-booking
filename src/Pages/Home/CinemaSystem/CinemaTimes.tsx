@@ -91,7 +91,7 @@ const StyledTabPanel = styled(TabPanel)`
     background: #000;
   }
 `;
-const ShowTimesFlims = ({ listCinema }: Props) => {
+const CinemaTimes = ({ listCinema }: Props) => {
   const [value, setValue] = useState(0);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -146,4 +146,4 @@ const ShowTimesFlims = ({ listCinema }: Props) => {
   );
 };
 
-export default ShowTimesFlims;
+export default CinemaTimes;

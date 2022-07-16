@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import store from "configStore";
+// import store from "configStore";
 const axiosClient = axios.create({
   baseURL: "https://movienew.cybersoft.edu.vn/api",
   headers: {
@@ -8,10 +8,7 @@ const axiosClient = axios.create({
   },
 });
 
-//request interceptor
 axiosClient.interceptors.request.use((config) => {
-  //config là nội dung của request
-  //ta có thể thay đổi nội dung của request trước khi gửi lên sever
   // if (config.headers) {
   //   const { accessToken = "" } = store.getState().authSlice.user || {};
   //   if (accessToken) {
