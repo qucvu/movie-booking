@@ -23,7 +23,7 @@ axiosClient.interceptors.response.use(
     return response.data.content;
   },
   (error: AxiosError<{ content: string }>) => {
-    return error.response?.data?.content;
+    // return error.response?.data.content;
   }
 );
 export default axiosClient;

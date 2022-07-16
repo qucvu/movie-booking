@@ -1,6 +1,5 @@
 import { Container, Grid, Link, Typography, Box } from "@mui/material";
 import styled from "@emotion/styled";
-
 import ImagesLogo from "./Images";
 import ios from "Assets/Footer/ContantsLogo/ios.png";
 import android from "Assets/Footer/ContantsLogo/android.png";
@@ -120,21 +119,23 @@ const FooterCommon = (props: Props) => {
           >
             <Box display={{ xs: "none", lg: "block" }}>
               <TextFooterCommon>MOBILE APP</TextFooterCommon>
-              <Link
-                href="https://apps.apple.com/vn/app/tix-%C4%91%E1%BA%B7t-v%C3%A9-nhanh-nh%E1%BA%A5t/id615186197"
-                target="_blank"
-                rel="noopener"
-                mr={2}
-              >
-                <StyledImg src={ios} alt="IOS" />
-              </Link>
-              <Link
-                href="https://play.google.com/store/apps/details?id=vn.com.vng.phim123"
-                target="_blank"
-                rel="noopener"
-              >
-                <StyledImg src={android} alt="Android" />
-              </Link>
+              <Box display="flex">
+                <Link
+                  href="https://apps.apple.com/vn/app/tix-%C4%91%E1%BA%B7t-v%C3%A9-nhanh-nh%E1%BA%A5t/id615186197"
+                  target="_blank"
+                  rel="noopener"
+                  mr={2}
+                >
+                  <StyledImg src={ios} alt="IOS" />
+                </Link>
+                <Link
+                  href="https://play.google.com/store/apps/details?id=vn.com.vng.phim123"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <StyledImg src={android} alt="Android" />
+                </Link>
+              </Box>
             </Box>
             <Box>
               <TextFooterCommon>LIỆN HỆ</TextFooterCommon>
