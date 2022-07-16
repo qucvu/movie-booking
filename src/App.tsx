@@ -6,15 +6,10 @@ import Footer from "Pages/Home/Footer/Footer";
 import { Box } from "@mui/material";
 import AppDesc from "Pages/Home/AppDesc/AppDesc";
 import CinemaSystem from "Pages/Home/CinemaSystem/CinemaSystem";
+import NewsSystem from "Pages/Home/NewsSystem/NewsSystem";
 
 function App() {
-  return (
-    <Box>
-      {/* <CinemaSystem /> */}
-      <AppDesc />
-      <Footer />
-    </Box>
-  );
+  return <Box></Box>;
 }
 
 export default App;
