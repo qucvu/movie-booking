@@ -119,7 +119,7 @@ const Banner = () => {
       </Slider>
       <Modal open={openPopup} onClose={handleClosePopup}>
         <Box>
-          <TrailerModal image={randomImgBanner()} />
+          <TrailerModal image={randomImgBanner()} onClose={handleClosePopup} />
         </Box>
       </Modal>
     </section>

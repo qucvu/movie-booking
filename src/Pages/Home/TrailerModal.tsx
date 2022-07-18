@@ -5,9 +5,10 @@ type Props = {
   children?: React.ReactNode;
   trailer?: string;
   image?: string;
+  onClose?: any;
 };
 
-const TrailerModal = ({ trailer, image }: Props) => {
+const TrailerModal = ({ trailer, image, onClose }: Props) => {
   return (
     <TrailerModalBox>
       {trailer ? (
@@ -32,6 +33,7 @@ const TrailerModal = ({ trailer, image }: Props) => {
               fontSize: "2.5rem",
               cursor: "pointer",
             }}
+            onClick={() => onClose()}
           />
           <img
             width="100%"
