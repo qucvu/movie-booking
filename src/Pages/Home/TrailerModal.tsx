@@ -1,26 +1,46 @@
-import { Movie } from "Interfaces/movieInterfaces";
 import { TrailerModalBox } from "_Playground/StyledComponents/home.styled";
+import CloseIcon from "@mui/icons-material/Close";
 
 type Props = {
-  movie?: Movie | null;
   children?: React.ReactNode;
+  trailer?: string;
+  image?: string;
 };
 
-const TrailerModal = (props: Props) => {
-  const { movie } = props;
+const TrailerModal = ({ trailer, image }: Props) => {
   return (
     <TrailerModalBox>
-      {movie?.trailer ? (
+      {trailer ? (
         <iframe
           width="100%"
-          height="400"
-          src={movie.trailer}
+          height="100%"
+          src={trailer}
           title="YouTube video player"
-          // frameborder="0"
-          // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          // allowfullscreen
           style={{ border: "none", display: "block" }}
         ></iframe>
+      ) : (
+        <div></div>
+      )}
+
+      {image ? (
+        <div style={{ width: "100%", height: "100%", display: "block" }}>
+          <CloseIcon
+            sx={{
+              position: "absolute",
+              right: 0,
+              color: "secondary.light",
+              fontSize: "2.5rem",
+              cursor: "pointer",
+            }}
+          />
+          <img
+            width="100%"
+            height="100%"
+            src={image}
+            alt={image}
+            style={{ border: "none", display: "block" }}
+          ></img>
+        </div>
       ) : (
         <div></div>
       )}

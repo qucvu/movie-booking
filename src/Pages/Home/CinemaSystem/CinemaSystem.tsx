@@ -6,8 +6,11 @@ import { getCinemaSystem } from "Slices/cinemaSlice";
 import { TabPanel, a11yProps } from "Pages/Home/CinemaSystem/Tabs";
 import styled from "@emotion/styled";
 import CinemaTimes from "./CinemaTimes";
+import { Movie } from "Interfaces/movieInterfaces";
 
-type Props = {};
+type Props = {
+  movie?: Movie | null | undefined;
+};
 
 const ImgCinema = styled.img`
   width: 3.5rem;
@@ -48,16 +51,16 @@ const StyledTabPanel = styled(TabPanel)`
     width: 100%;
   }
 `;
-const CinemaSystem = (props: Props) => {
+const CinemaSystem = ({ movie }: Props) => {
   const { cinemaSystems, error } = useSelector(
     (state: RootState) => state.cinema
   );
   const [value, setValue] = useState(0);
-
+  console.log(movie);
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    dispatch(getCinemaSystem());
-  }, [dispatch]);
+    if (!movie) dispatch(getCinemaSystem());
+  }, [dispatch, movie]);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
@@ -65,6 +68,7 @@ const CinemaSystem = (props: Props) => {
   if (error) {
     return <h1>{error}</h1>;
   }
+
   return (
     <Container maxWidth="lg">
       <Paper elevation={20} sx={{ borderTop: "1px solid #ccc" }}>
@@ -82,29 +86,59 @@ const CinemaSystem = (props: Props) => {
             aria-label="tabs cinema system"
             orientation="vertical"
           >
-            {cinemaSystems.map((cinema, index) => {
-              return (
-                <StyledTab
-                  key={cinema.maHeThongRap}
-                  label={
-                    <ImgCinema src={cinema.logo} alt={cinema.tenHeThongRap} />
-                  }
-                  {...a11yProps(index)}
-                />
-              );
-            })}
+            {movie
+              ? movie.heThongRapChieu?.map((cinema, index) => {
+                  return (
+                    <StyledTab
+                      key={cinema.maHeThongRap}
+                      label={
+                        <ImgCinema
+                          src={cinema.logo}
+                          alt={cinema.tenHeThongRap}
+                        />
+                      }
+                      {...a11yProps(index)}
+                    />
+                  );
+                })
+              : cinemaSystems.map((cinema, index) => {
+                  return (
+                    <StyledTab
+                      key={cinema.maHeThongRap}
+                      label={
+                        <ImgCinema
+                          src={cinema.logo}
+                          alt={cinema.tenHeThongRap}
+                        />
+                      }
+                      {...a11yProps(index)}
+                    />
+                  );
+                })}
           </StyledTabs>
-          {cinemaSystems.map((cinema, index) => {
-            return (
-              <StyledTabPanel
-                key={cinema.maHeThongRap}
-                value={value}
-                index={index}
-              >
-                <CinemaTimes listCinema={cinema.lstCumRap} />
-              </StyledTabPanel>
-            );
-          })}
+          {movie
+            ? movie.heThongRapChieu?.map((cinema, index) => {
+                return (
+                  <StyledTabPanel
+                    key={cinema.maHeThongRap}
+                    value={value}
+                    index={index}
+                  >
+                    <CinemaTimes listCinema={cinema.cumRapChieu} />
+                  </StyledTabPanel>
+                );
+              })
+            : cinemaSystems.map((cinema, index) => {
+                return (
+                  <StyledTabPanel
+                    key={cinema.maHeThongRap}
+                    value={value}
+                    index={index}
+                  >
+                    <CinemaTimes listCinema={cinema.lstCumRap} />
+                  </StyledTabPanel>
+                );
+              })}
         </Box>
       </Paper>
     </Container>

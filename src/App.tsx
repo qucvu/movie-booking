@@ -7,6 +7,8 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import ErrorBoundary from "Components/ErrorBoundary/ErrorBoundary";
+import HomeTemplate from "Templates/HomeTemplate";
+import DetailPage from "Pages/Detail/DetailPage";
 
 function App() {
   return (
@@ -14,7 +16,12 @@ function App() {
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <Routes>
-            <Route path="" element={<HomePage />} />
+            <Route path="" element={<HomeTemplate />}>
+              <Route index element={<HomePage />} />
+              <Route path="detail" element={<DetailPage />}>
+                <Route path=":movieName/:movieId" element={<DetailPage />} />
+              </Route>
+            </Route>
           </Routes>
         </ThemeProvider>
         <GlobalStyles />

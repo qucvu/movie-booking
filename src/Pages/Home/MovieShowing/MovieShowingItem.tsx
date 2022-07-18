@@ -18,15 +18,16 @@ import {
 } from "_Playground/StyledComponents/home.styled";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import { useState } from "react";
-
 import TrailerModal from "../TrailerModal";
+import { useNavigate } from "react-router-dom";
 type Props = {
   movie: Movie;
 };
 
-const MovieShowingItem = (props: Props) => {
+const MovieShowingItem = ({ movie }: Props) => {
   const [open, setOpen] = useState(false);
-  const { movie } = props;
+
+  const navigate = useNavigate();
 
   const handleOpen = () => {
     setOpen(true);
@@ -64,13 +65,15 @@ const MovieShowingItem = (props: Props) => {
                 }}
               />
             </ButtonPlay>
-            <ButtonDetail>
-              <Typography>Chi tiết</Typography>
+            <ButtonDetail
+              onClick={() => navigate(`detail/${movie.biDanh}/${movie.maPhim}`)}
+            >
+              <Typography>Đặt vé</Typography>
             </ButtonDetail>
           </CardActions>
           <Modal open={open} onClose={handleClose}>
             <Box>
-              <TrailerModal movie={movie} />
+              <TrailerModal trailer={movie.trailer} />
             </Box>
           </Modal>
         </CardOverlay>

@@ -1,5 +1,6 @@
 import axiosClient from "Services/axiosClient";
 import { CinemaSystem } from "Interfaces/Cinema";
+import { Movie } from "Interfaces/movieInterfaces";
 const CinemaAPI = {
   getCinemaSystem: (cinemaId?: string) => {
     return axiosClient.get<CinemaSystem[]>(
@@ -11,6 +12,14 @@ const CinemaAPI = {
         },
       }
     );
+  },
+
+  getMovieShowtimeInfo: (maPhim?: string) => {
+    return axiosClient.get<Movie>("QuanLyRap/LayThongTinLichChieuPhim", {
+      params: {
+        maPhim: maPhim,
+      },
+    });
   },
 };
 
