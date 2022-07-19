@@ -39,7 +39,7 @@ const MovieShowingItem = ({ movie }: Props) => {
       <CardBox>
         <CardMedia
           component="img"
-          height="300"
+          height={300}
           image={movie.hinhAnh}
           alt={movie.hinhAnh}
         />

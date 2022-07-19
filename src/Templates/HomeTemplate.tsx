@@ -1,5 +1,5 @@
 import Header from "Components/Header/Header";
-import Footer from "Pages/Home/Footer/Footer";
+import CompanyInfo from "Pages/Home/Footer/CompanyInfo";
 import { Fragment } from "react";
 import { Outlet } from "react-router-dom";
 
@@ -10,7 +10,7 @@ const HomeTemplate = (props: Props) => {
     <Fragment>
       <Header />
       <Outlet />
-      <Footer />
+      <CompanyInfo />
     </Fragment>
   );
 };

@@ -1,5 +1,4 @@
-import { Fragment } from "react";
-import BreadcrumbNav from "Pages/BreadcrumbNav/BreadcrumbNav";
+import BreadcrumbNav from "Pages/Detail/BreadcrumbNav/BreadcrumbNav";
 import DetailBanner from "./DetailBanner/DetailBanner";
 import DetailShowTime from "./DetailShowTime/DetailShowTime";
 import {

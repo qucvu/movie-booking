@@ -97,7 +97,7 @@ const CinemaTimes = ({ listCinema }: Props) => {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-  console.log(listCinema);
+
   return (
     <Box
       sx={{
@@ -125,7 +125,6 @@ const CinemaTimes = ({ listCinema }: Props) => {
       {listCinema.map((cinema, index) => {
         return (
           <StyledTabPanel key={cinema.maCumRap} value={value} index={index}>
-<<<<<<< HEAD
             {cinema.lichChieuPhim ? (
               <FilmBox
                 key={cinema.maCumRap}
@@ -135,24 +134,17 @@ const CinemaTimes = ({ listCinema }: Props) => {
               />
             ) : (
               cinema.danhSachPhim?.map((film: listFilm) => {
-=======
-            {cinema.danhSachPhim.map((film) => {
-              if (film.dangChieu)
->>>>>>> e350db0360638c3da99fc89fda97fe073f740674
-                return (
-                  <FilmBox
-                    key={film.maPhim}
-                    nameFilm={film.tenPhim}
-                    timeFilm={film.lstLichChieuTheoPhim}
-                    imgFilm={film.hinhAnh}
-                  />
-                );
-<<<<<<< HEAD
+                if (film.dangChieu)
+                  return (
+                    <FilmBox
+                      key={film.maPhim}
+                      nameFilm={film.tenPhim}
+                      timeFilm={film.lstLichChieuTheoPhim}
+                      imgFilm={film.hinhAnh}
+                    />
+                  );
               })
             )}
-=======
-            })}
->>>>>>> e350db0360638c3da99fc89fda97fe073f740674
           </StyledTabPanel>
         );
       })}

@@ -87,7 +87,7 @@ const CinemaSystem = ({ movie }: Props) => {
   }
   if (isLoading) return <LoadingAPI />;
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ my: 5 }}>
       <Paper elevation={20} sx={{ borderTop: "1px solid #ccc" }}>
         <Box
           sx={{
@@ -110,13 +110,16 @@ const CinemaSystem = ({ movie }: Props) => {
                       key={cinema.maHeThongRap}
                       label={
                         <Box>
-                      <ImgCinema src={cinema.logo} alt={cinema.tenHeThongRap} />
-                      <Detail
-                        onClick={() => navigate(`/${cinema.maHeThongRap}`)}
-                      >
-                        [Chi Tiết]
-                      </Detail>
-                    </Box>
+                          <ImgCinema
+                            src={cinema.logo}
+                            alt={cinema.tenHeThongRap}
+                          />
+                          <Detail
+                            onClick={() => navigate(`/${cinema.maHeThongRap}`)}
+                          >
+                            [Chi Tiết]
+                          </Detail>
+                        </Box>
                       }
                       {...a11yProps(index)}
                     />
@@ -128,36 +131,21 @@ const CinemaSystem = ({ movie }: Props) => {
                       key={cinema.maHeThongRap}
                       label={
                         <Box>
-                      <ImgCinema src={cinema.logo} alt={cinema.tenHeThongRap} />
-                      <Detail
-                        onClick={() => navigate(`/${cinema.maHeThongRap}`)}
-                      >
-                        [Chi Tiết]
-                      </Detail>
-                    </Box>
+                          <ImgCinema
+                            src={cinema.logo}
+                            alt={cinema.tenHeThongRap}
+                          />
+                          <Detail
+                            onClick={() => navigate(`/${cinema.maHeThongRap}`)}
+                          >
+                            [Chi Tiết]
+                          </Detail>
+                        </Box>
                       }
                       {...a11yProps(index)}
                     />
                   );
                 })}
-            {/* {cinemaSystems.map((cinema, index) => {
-              return (
-                <StyledTab
-                  key={cinema.maHeThongRap}
-                  label={
-                    <Box>
-                      <ImgCinema src={cinema.logo} alt={cinema.tenHeThongRap} />
-                      <Detail
-                        onClick={() => navigate(`/${cinema.maHeThongRap}`)}
-                      >
-                        [Chi Tiết]
-                      </Detail>
-                    </Box>
-                  }
-                  {...a11yProps(index)}
-                />
-              );
-            })} */}
           </StyledTabs>
           {movie
             ? movie.heThongRapChieu?.map((cinema, index) => {
