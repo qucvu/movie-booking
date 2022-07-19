@@ -13,6 +13,7 @@ type Props = {
 const TabsCinemaAdress = styled(Tabs)`
   height: 35rem;
   min-width: 15rem;
+  max-width: 15rem;
   border-right: 1px solid #ccc;
   @media screen and (max-width: 700px) {
     min-width: 100%;
@@ -114,12 +115,7 @@ const CinemaTimes = ({ listCinema }: Props) => {
           return (
             <TabCinemaAdress
               key={cinema.maCumRap}
-              label={
-                <CinemaBox
-                  cinemaName={cinema.tenCumRap}
-                  cinemaAddress={cinema.diaChi}
-                />
-              }
+              label={<CinemaBox cinema={cinema} />}
               {...a11yProps(index)}
             />
           );
@@ -129,6 +125,7 @@ const CinemaTimes = ({ listCinema }: Props) => {
       {listCinema.map((cinema, index) => {
         return (
           <StyledTabPanel key={cinema.maCumRap} value={value} index={index}>
+<<<<<<< HEAD
             {cinema.lichChieuPhim ? (
               <FilmBox
                 key={cinema.maCumRap}
@@ -138,6 +135,10 @@ const CinemaTimes = ({ listCinema }: Props) => {
               />
             ) : (
               cinema.danhSachPhim?.map((film: listFilm) => {
+=======
+            {cinema.danhSachPhim.map((film) => {
+              if (film.dangChieu)
+>>>>>>> e350db0360638c3da99fc89fda97fe073f740674
                 return (
                   <FilmBox
                     key={film.maPhim}
@@ -146,8 +147,12 @@ const CinemaTimes = ({ listCinema }: Props) => {
                     imgFilm={film.hinhAnh}
                   />
                 );
+<<<<<<< HEAD
               })
             )}
+=======
+            })}
+>>>>>>> e350db0360638c3da99fc89fda97fe073f740674
           </StyledTabPanel>
         );
       })}

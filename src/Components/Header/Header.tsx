@@ -16,6 +16,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { HeaderAside } from "_Playground/StyledComponents/home.styled";
 import { NavLink } from "react-router-dom";
+import Logo from "Components/Logo/Logo";
 
 const pages = ["Lịch chiếu", "Cụm rạp", "Tin tức", "Ứng dụng"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -46,23 +47,23 @@ const Header = (props: Props) => {
       <AppBar position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <NavLink to={"/"}>
-              <Typography
-                variant="h6"
-                noWrap
-                sx={{
-                  mr: 2,
-                  display: { xs: "none", md: "flex" },
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "primary.contrastText",
-                  textDecoration: "none",
-                }}
-              >
-                LOGO
-              </Typography>
-            </NavLink>
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              <Logo />
+            </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
@@ -106,7 +107,7 @@ const Header = (props: Props) => {
                       textDecoration: "none",
                     }}
                   >
-                    LOGO
+                    <Logo />
                   </Typography>
                 </MenuItem>
                 {pages.map((page) => (
@@ -133,7 +134,7 @@ const Header = (props: Props) => {
                 textDecoration: "none",
               }}
             >
-              LOGO
+              <Logo />
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>

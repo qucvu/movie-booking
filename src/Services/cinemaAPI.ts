@@ -14,10 +14,17 @@ const CinemaAPI = {
     );
   },
 
+<<<<<<< HEAD
   getMovieShowtimeInfo: (maPhim?: string) => {
     return axiosClient.get<Movie>("QuanLyRap/LayThongTinLichChieuPhim", {
       params: {
         maPhim: maPhim,
+=======
+  getFlimInfo: (filmId: string) => {
+    return axiosClient.get("QuanLyRap/LayThongTinLichChieuPhim", {
+      params: {
+        MaPhim: filmId,
+>>>>>>> e350db0360638c3da99fc89fda97fe073f740674
       },
     });
   },
