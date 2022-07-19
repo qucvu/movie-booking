@@ -6,13 +6,10 @@ import { getCinemaSystem } from "Slices/cinemaSlice";
 import { TabPanel, a11yProps } from "Pages/Home/CinemaSystem/Tabs";
 import styled from "@emotion/styled";
 import CinemaTimes from "./CinemaTimes";
-<<<<<<< HEAD
 import { Movie } from "Interfaces/movieInterfaces";
-=======
 import ErrorAPI from "Components/ErrorAPI/ErrorAPI";
 import LoadingAPI from "Components/LoadingAPI/LoadingAPI";
 import { useNavigate } from "react-router-dom";
->>>>>>> e350db0360638c3da99fc89fda97fe073f740674
 
 type Props = {
   movie?: Movie | null | undefined;
@@ -58,10 +55,6 @@ const StyledTabPanel = styled(TabPanel)`
     width: 100%;
   }
 `;
-<<<<<<< HEAD
-const CinemaSystem = ({ movie }: Props) => {
-  const { cinemaSystems, error } = useSelector(
-=======
 const Detail = styled("p")`
   color: #fb4226;
   font-size: 0.8rem;
@@ -75,17 +68,12 @@ const Detail = styled("p")`
   }
 `;
 
-const CinemaSystem = (props: Props) => {
+const CinemaSystem = ({ movie }: Props) => {
   const { cinemaSystems, error, isLoading } = useSelector(
->>>>>>> e350db0360638c3da99fc89fda97fe073f740674
     (state: RootState) => state.cinema
   );
   const navigate = useNavigate();
   const [value, setValue] = useState(0);
-<<<<<<< HEAD
-  console.log(movie);
-=======
->>>>>>> e350db0360638c3da99fc89fda97fe073f740674
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     if (!movie) dispatch(getCinemaSystem());
@@ -97,11 +85,7 @@ const CinemaSystem = (props: Props) => {
   if (error) {
     return <ErrorAPI />;
   }
-<<<<<<< HEAD
-
-=======
   if (isLoading) return <LoadingAPI />;
->>>>>>> e350db0360638c3da99fc89fda97fe073f740674
   return (
     <Container maxWidth="lg">
       <Paper elevation={20} sx={{ borderTop: "1px solid #ccc" }}>
@@ -119,17 +103,20 @@ const CinemaSystem = (props: Props) => {
             aria-label="tabs cinema system"
             orientation="vertical"
           >
-<<<<<<< HEAD
             {movie
               ? movie.heThongRapChieu?.map((cinema, index) => {
                   return (
                     <StyledTab
                       key={cinema.maHeThongRap}
                       label={
-                        <ImgCinema
-                          src={cinema.logo}
-                          alt={cinema.tenHeThongRap}
-                        />
+                        <Box>
+                      <ImgCinema src={cinema.logo} alt={cinema.tenHeThongRap} />
+                      <Detail
+                        onClick={() => navigate(`/${cinema.maHeThongRap}`)}
+                      >
+                        [Chi Tiết]
+                      </Detail>
+                    </Box>
                       }
                       {...a11yProps(index)}
                     />
@@ -140,17 +127,20 @@ const CinemaSystem = (props: Props) => {
                     <StyledTab
                       key={cinema.maHeThongRap}
                       label={
-                        <ImgCinema
-                          src={cinema.logo}
-                          alt={cinema.tenHeThongRap}
-                        />
+                        <Box>
+                      <ImgCinema src={cinema.logo} alt={cinema.tenHeThongRap} />
+                      <Detail
+                        onClick={() => navigate(`/${cinema.maHeThongRap}`)}
+                      >
+                        [Chi Tiết]
+                      </Detail>
+                    </Box>
                       }
                       {...a11yProps(index)}
                     />
                   );
                 })}
-=======
-            {cinemaSystems.map((cinema, index) => {
+            {/* {cinemaSystems.map((cinema, index) => {
               return (
                 <StyledTab
                   key={cinema.maHeThongRap}
@@ -167,8 +157,7 @@ const CinemaSystem = (props: Props) => {
                   {...a11yProps(index)}
                 />
               );
-            })}
->>>>>>> e350db0360638c3da99fc89fda97fe073f740674
+            })} */}
           </StyledTabs>
           {movie
             ? movie.heThongRapChieu?.map((cinema, index) => {
