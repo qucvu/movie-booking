@@ -6,19 +6,20 @@ import CinemaSystem from "./CinemaSystem/CinemaSystem";
 import Footer from "./Footer/Footer";
 import MovieShowing from "./MovieShowing/MovieShowing";
 import NewsSystem from "./NewsSystem/NewsSystem";
+import SearchBooking from "./SearchBooking/SearchBooking";
 
 type Props = {};
 
 const HomePage = (props: Props) => {
   return (
     <Fragment>
-      <Header />
-      <Banner />
-      <MovieShowing />
+      {/* <Banner /> */}
+      {/* <MovieShowing /> */}
+      <SearchBooking />
       <CinemaSystem />
-      <NewsSystem />
-      <AppDesc />
-      <Footer />
+
+      {/* <NewsSystem /> */}
+      {/* <AppDesc /> */}
     </Fragment>
   );
 };

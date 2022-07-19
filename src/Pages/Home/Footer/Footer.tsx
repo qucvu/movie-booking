@@ -11,7 +11,6 @@ const Footer: React.FC = (props: Props) => {
       <FooterCommon />
 
       <CompanyInfo />
-      <BackToTop />
     </WrapperFooter>
   );
 };
