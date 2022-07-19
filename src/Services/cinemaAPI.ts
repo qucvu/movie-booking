@@ -12,6 +12,14 @@ const CinemaAPI = {
       }
     );
   },
+
+  getFlimInfo: (filmId: string) => {
+    return axiosClient.get("QuanLyRap/LayThongTinLichChieuPhim", {
+      params: {
+        MaPhim: filmId,
+      },
+    });
+  },
 };
 
 export default CinemaAPI;

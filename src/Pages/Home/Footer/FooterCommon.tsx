@@ -4,6 +4,7 @@ import ImagesLogo from "./Images";
 import ios from "Assets/Footer/ContantsLogo/ios.png";
 import android from "Assets/Footer/ContantsLogo/android.png";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import BackToTop from "./BackToTop";
 
 type Props = {};
 
@@ -42,127 +43,132 @@ const TextContact = styled("span")`
 const FooterCommon = (props: Props) => {
   return (
     <div>
-      <Container maxWidth="lg">
-        <Grid container spacing={2}>
-          <Grid item lg={3} sm={4} display={{ xs: "none", sm: "block" }}>
-            <TextFooterCommon>TIC AND CHILL</TextFooterCommon>
-            <Typography>
-              <StyledLink href="#" underline="none">
-                Giới thiệu
-              </StyledLink>
-            </Typography>
-            <Typography>
-              <StyledLink href="#" underline="none">
-                FAQ
-              </StyledLink>
-            </Typography>
-            <Typography>
-              <StyledLink href="#" underline="none">
-                Liên hệ
-              </StyledLink>
-            </Typography>
-          </Grid>
-          <Grid item lg={3} sm={4} display={{ xs: "none", sm: "block" }}>
-            <TextFooterCommon>ĐIỀU KHOẢN SỬ DỤNG</TextFooterCommon>
-            <Typography>
-              <StyledLink href="#" underline="none">
-                Điều Khoản Chung
-              </StyledLink>
-            </Typography>
-            <Typography>
-              <StyledLink href="#" underline="none">
-                Điều Khoản Giao Dịch
-              </StyledLink>
-            </Typography>
-            <Typography>
-              <StyledLink href="#" underline="none">
-                Điều Khoản Thanh Toán
-              </StyledLink>
-            </Typography>
-
-            <Typography>
-              <StyledLink href="#" underline="none">
-                Điều Khoản Bảo Mật
-              </StyledLink>
-            </Typography>
-            <Typography>
-              <StyledLink href="#" color="inherit" underline="none">
-                Câu Hỏi Thường Gặp
-              </StyledLink>
-            </Typography>
-          </Grid>
-          <Grid item lg={4} display={{ xs: "none", lg: "block" }}>
-            <TextFooterCommon>ĐỐI TÁC</TextFooterCommon>
-            <Grid container rowSpacing={2}>
-              {ImagesLogo.map((image) => {
-                return (
-                  <Grid item xs={3} key={image.id}>
-                    <Link href={image.href} target="_blank" rel="noopener">
-                      <StyledImg src={image.src} alt={image.name} />
-                    </Link>
-                  </Grid>
-                );
-              })}
+      <Box
+        sx={{ backgroundColor: "#212121", color: "#fff", padding: "1.2rem 0" }}
+      >
+        <BackToTop />
+        <Container maxWidth="lg">
+          <Grid container spacing={2}>
+            <Grid item lg={3} sm={4} display={{ xs: "none", sm: "block" }}>
+              <TextFooterCommon>TIC AND CHILL</TextFooterCommon>
+              <Typography>
+                <StyledLink href="#" underline="none">
+                  Giới thiệu
+                </StyledLink>
+              </Typography>
+              <Typography>
+                <StyledLink href="#" underline="none">
+                  FAQ
+                </StyledLink>
+              </Typography>
+              <Typography>
+                <StyledLink href="#" underline="none">
+                  Liên hệ
+                </StyledLink>
+              </Typography>
             </Grid>
-          </Grid>
-          <Grid
-            xs={12}
-            item
-            lg={2}
-            sm={4}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              alignItems: { xs: "center", md: "flex-start" },
-            }}
-          >
-            <Box display={{ xs: "none", lg: "block" }}>
-              <TextFooterCommon>MOBILE APP</TextFooterCommon>
-              <Box display="flex">
+            <Grid item lg={3} sm={4} display={{ xs: "none", sm: "block" }}>
+              <TextFooterCommon>ĐIỀU KHOẢN SỬ DỤNG</TextFooterCommon>
+              <Typography>
+                <StyledLink href="#" underline="none">
+                  Điều Khoản Chung
+                </StyledLink>
+              </Typography>
+              <Typography>
+                <StyledLink href="#" underline="none">
+                  Điều Khoản Giao Dịch
+                </StyledLink>
+              </Typography>
+              <Typography>
+                <StyledLink href="#" underline="none">
+                  Điều Khoản Thanh Toán
+                </StyledLink>
+              </Typography>
+
+              <Typography>
+                <StyledLink href="#" underline="none">
+                  Điều Khoản Bảo Mật
+                </StyledLink>
+              </Typography>
+              <Typography>
+                <StyledLink href="#" color="inherit" underline="none">
+                  Câu Hỏi Thường Gặp
+                </StyledLink>
+              </Typography>
+            </Grid>
+            <Grid item lg={4} display={{ xs: "none", lg: "block" }}>
+              <TextFooterCommon>ĐỐI TÁC</TextFooterCommon>
+              <Grid container rowSpacing={2}>
+                {ImagesLogo.map((image) => {
+                  return (
+                    <Grid item xs={3} key={image.id}>
+                      <Link href={image.href} target="_blank" rel="noopener">
+                        <StyledImg src={image.src} alt={image.name} />
+                      </Link>
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            </Grid>
+            <Grid
+              xs={12}
+              item
+              lg={2}
+              sm={4}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                alignItems: { xs: "center", md: "flex-start" },
+              }}
+            >
+              <Box display={{ xs: "none", lg: "block" }}>
+                <TextFooterCommon>MOBILE APP</TextFooterCommon>
+                <Box display="flex">
+                  <Link
+                    href="https://apps.apple.com/vn/app/tix-%C4%91%E1%BA%B7t-v%C3%A9-nhanh-nh%E1%BA%A5t/id615186197"
+                    target="_blank"
+                    rel="noopener"
+                    mr={2}
+                  >
+                    <StyledImg src={ios} alt="IOS" />
+                  </Link>
+                  <Link
+                    href="https://play.google.com/store/apps/details?id=vn.com.vng.phim123"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    <StyledImg src={android} alt="Android" />
+                  </Link>
+                </Box>
+              </Box>
+              <Box>
+                <TextFooterCommon>LIỆN HỆ</TextFooterCommon>
                 <Link
-                  href="https://apps.apple.com/vn/app/tix-%C4%91%E1%BA%B7t-v%C3%A9-nhanh-nh%E1%BA%A5t/id615186197"
-                  target="_blank"
-                  rel="noopener"
-                  mr={2}
+                  href="#"
+                  display="flex"
+                  alignItems="center"
+                  underline="none"
+                  mb={1}
                 >
-                  <StyledImg src={ios} alt="IOS" />
+                  <FacebookIcon color="info" />
+                  <TextContact>Vũ</TextContact>
                 </Link>
                 <Link
-                  href="https://play.google.com/store/apps/details?id=vn.com.vng.phim123"
-                  target="_blank"
-                  rel="noopener"
+                  href="#"
+                  display="flex"
+                  alignItems="center"
+                  underline="none"
+                  mb={1}
                 >
-                  <StyledImg src={android} alt="Android" />
+                  <FacebookIcon color="info" />
+                  <TextContact>Dũng</TextContact>
                 </Link>
               </Box>
-            </Box>
-            <Box>
-              <TextFooterCommon>LIỆN HỆ</TextFooterCommon>
-              <Link
-                href="#"
-                display="flex"
-                alignItems="center"
-                underline="none"
-                mb={1}
-              >
-                <FacebookIcon color="info" />
-                <TextContact>Vũ</TextContact>
-              </Link>
-              <Link
-                href="#"
-                display="flex"
-                alignItems="center"
-                underline="none"
-                mb={1}
-              >
-                <FacebookIcon color="info" />
-                <TextContact>Dũng</TextContact>
-              </Link>
-            </Box>
+            </Grid>
           </Grid>
-        </Grid>
-      </Container>
+        </Container>
+      </Box>
     </div>
   );
 };

@@ -1,10 +1,9 @@
 import styled from "@emotion/styled";
-import { Box, Typography } from "@mui/material";
-import React from "react";
+import { Box } from "@mui/material";
+import { Cinema } from "Interfaces/Cinema";
 
 type Props = {
-  cinemaName: string;
-  cinemaAddress: string;
+  cinema: Cinema;
 };
 const StyledTitle = styled.h1`
   color: #108f3e;
@@ -21,24 +20,13 @@ const StyledAddress = styled("p")`
   text-overflow: ellipsis;
   overflow: hidden;
   display: inherit;
+  margin-bottom: 1rem;
 `;
-const Detail = styled(Typography)`
-  margin-top: 0.9rem;
-  color: #fb4226;
-  font-size: 0.8rem;
-  text-decoration: none;
-  font-weight: 500;
-  &:hover {
-    color: #000;
-    font-weight: 700;
-  }
-`;
-const CinemaBox = ({ cinemaName, cinemaAddress }: Props) => {
+const CinemaBox = ({ cinema }: Props) => {
   return (
     <Box sx={{ width: "100%" }}>
-      <StyledTitle>{cinemaName}</StyledTitle>
-      <StyledAddress>{cinemaAddress}</StyledAddress>
-      <Detail variant="body1">[Chi Tiết]</Detail>
+      <StyledTitle>{cinema.tenCumRap}</StyledTitle>
+      <StyledAddress>{cinema.diaChi}</StyledAddress>
     </Box>
   );
 };

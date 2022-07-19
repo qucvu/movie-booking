@@ -15,6 +15,7 @@ import {
 
 import MenuIcon from "@mui/icons-material/Menu";
 import { HeaderAside } from "_Playground/StyledComponents/home.styled";
+import Logo from "Components/Logo/Logo";
 
 const pages = ["Lịch chiếu", "Cụm rạp", "Tin tức", "Ứng dụng"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -60,7 +61,7 @@ const Header = (props: Props) => {
                 textDecoration: "none",
               }}
             >
-              LOGO
+              <Logo />
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -105,7 +106,7 @@ const Header = (props: Props) => {
                       textDecoration: "none",
                     }}
                   >
-                    LOGO
+                    <Logo />
                   </Typography>
                 </MenuItem>
                 {pages.map((page) => (
@@ -132,7 +133,7 @@ const Header = (props: Props) => {
                 textDecoration: "none",
               }}
             >
-              LOGO
+              <Logo />
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
