@@ -74,35 +74,37 @@ export default function BasicTabs() {
   };
 
   return (
-    <Container sx={{ my: 5 }}>
-      <Box sx={{ width: "100%" }}>
-        <Box>
-          <Tabs value={value} onChange={handleChange} centered>
-            <Tab label="Phim đang chiếu" id="simple-tab-0" />
-            <Tab label="Phim sắp chiếu" id="simple-tab-1" />
-          </Tabs>
+    <Box sx={{ py: 5, bgcolor: "paper.main" }}>
+      <Container>
+        <Box sx={{ width: "100%" }}>
+          <Box>
+            <Tabs value={value} onChange={handleChange} centered>
+              <Tab label="Phim đang chiếu" id="simple-tab-0" />
+              <Tab label="Phim sắp chiếu" id="simple-tab-1" />
+            </Tabs>
+          </Box>
+          <TabPanel value={value} index={0}>
+            <Slider {...settings}>
+              {movies?.map((movie) => {
+                if (value === 0 && movie.dangChieu) {
+                  return <MovieShowingItem key={movie.maPhim} movie={movie} />;
+                }
+                return null;
+              })}
+            </Slider>
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <Slider {...settings}>
+              {movies?.map((movie) => {
+                if (value === 1 && movie.sapChieu) {
+                  return <MovieShowingItem key={movie.maPhim} movie={movie} />;
+                }
+                return null;
+              })}
+            </Slider>
+          </TabPanel>
         </Box>
-        <TabPanel value={value} index={0}>
-          <Slider {...settings}>
-            {movies?.map((movie) => {
-              if (value === 0 && movie.dangChieu) {
-                return <MovieShowingItem key={movie.maPhim} movie={movie} />;
-              }
-              return null;
-            })}
-          </Slider>
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <Slider {...settings}>
-            {movies?.map((movie) => {
-              if (value === 1 && movie.sapChieu) {
-                return <MovieShowingItem key={movie.maPhim} movie={movie} />;
-              }
-              return null;
-            })}
-          </Slider>
-        </TabPanel>
-      </Box>
-    </Container>
+      </Container>
+    </Box>
   );
 }
