@@ -67,51 +67,53 @@ const NewsSystem = (props: Props) => {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ my: 5 }}>
-      <Box sx={{ width: "100%" }}>
-        <Box>
-          <StyledTabs
-            value={value}
-            onChange={handleChange}
-            aria-label="Tabs news"
-            centered
-          >
-            <StyledTab label="Điện Ảnh 24h" {...a11yProps(0)} />
-            <StyledTab label="Review" {...a11yProps(1)} />
-            <StyledTab label="Khuyến mãi" {...a11yProps(2)} />
-          </StyledTabs>
-        </Box>
-        {isLoading ? (
-          <Box textAlign="center">
-            <CircularProgress color="error" />
+    <Box sx={{ py: 5, bgcolor: "paper.main" }}>
+      <Container maxWidth="lg">
+        <Box sx={{ width: "100%" }}>
+          <Box>
+            <StyledTabs
+              value={value}
+              onChange={handleChange}
+              aria-label="Tabs news"
+              centered
+            >
+              <StyledTab label="Điện Ảnh 24h" {...a11yProps(0)} />
+              <StyledTab label="Review" {...a11yProps(1)} />
+              <StyledTab label="Khuyến mãi" {...a11yProps(2)} />
+            </StyledTabs>
           </Box>
-        ) : (
-          !hiddenTabs && (
-            <WrappedTabItem>
-              <TabPanel value={value} index={0}>
-                <NewsList list={FilmsAPI} />
-              </TabPanel>
-              <TabPanel value={value} index={1}>
-                <NewsList list={ReviewAPIs} reactData />
-              </TabPanel>
-              <TabPanel value={value} index={2}>
-                <NewsList list={CouponAPIs} reactData />
-              </TabPanel>
-            </WrappedTabItem>
-          )
-        )}
-        <Box textAlign="center">
-          <StyledButton
-            variant="outlined"
-            color="error"
-            onClick={() => toggleHiddenTabs()}
-            size="large"
-          >
-            {hiddenTabs ? " XEM THÊM" : "RÚT GỌN"}
-          </StyledButton>
+          {isLoading ? (
+            <Box textAlign="center">
+              <CircularProgress color="error" />
+            </Box>
+          ) : (
+            !hiddenTabs && (
+              <WrappedTabItem>
+                <TabPanel value={value} index={0}>
+                  <NewsList list={FilmsAPI} />
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                  <NewsList list={ReviewAPIs} reactData />
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+                  <NewsList list={CouponAPIs} reactData />
+                </TabPanel>
+              </WrappedTabItem>
+            )
+          )}
+          <Box textAlign="center">
+            <StyledButton
+              variant="outlined"
+              color="error"
+              onClick={() => toggleHiddenTabs()}
+              size="large"
+            >
+              {hiddenTabs ? " XEM THÊM" : "RÚT GỌN"}
+            </StyledButton>
+          </Box>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </Box>
   );
 };
 
