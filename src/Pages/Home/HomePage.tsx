@@ -15,8 +15,9 @@ const HomePage = (props: Props) => {
     <Fragment>
       {/* <Banner /> */}
       {/* <MovieShowing /> */}
-      <SearchBooking />
-      <CinemaSystem />
+      <div className="my-5">
+        <SearchBooking />
+      </div>
 
       {/* <NewsSystem /> */}
       {/* <AppDesc /> */}
