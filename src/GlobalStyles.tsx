@@ -1,6 +1,19 @@
-import { createTheme } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 import { createGlobalStyle } from "styled-components";
+declare module "@mui/material/styles" {
+  interface Theme {
+    status: {
+      danger: React.CSSProperties["color"];
+    };
+  }
 
+  interface Palette {
+    paper: Palette["primary"];
+  }
+  interface PaletteOptions {
+    paper: PaletteOptions["primary"];
+  }
+}
 export const theme = createTheme({
   palette: {
     primary: {
@@ -15,6 +28,7 @@ export const theme = createTheme({
       dark: "#c56200",
       contrastText: "#000",
     },
+    paper: { main: "#fdfcf0" },
   },
 });
 const GlobalStyles = createGlobalStyle`
