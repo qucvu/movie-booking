@@ -48,7 +48,11 @@ const SearchBooking = (props: Props) => {
             onChange={(evt) => setMovieId(evt.target.value)}
           >
             {movies.map((item, index) => {
-              return <MenuItem value={item.maPhim}>{item.tenPhim}</MenuItem>;
+              return (
+                <MenuItem value={item.maPhim} key={index}>
+                  {item.tenPhim}
+                </MenuItem>
+              );
             })}
           </Select>
         </FormControl>
