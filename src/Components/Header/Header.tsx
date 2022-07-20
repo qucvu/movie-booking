@@ -47,14 +47,14 @@ const Header = (props: Props) => {
       <Container>
         <Toolbar disableGutters>
           <NavLink to={"/"}>
-            <Typography
+            <Box
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
               }}
             >
               <Logo />
-            </Typography>
+            </Box>
           </NavLink>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -84,14 +84,14 @@ const Header = (props: Props) => {
             >
               <MenuItem>
                 <NavLink to={"/"}>
-                  <Typography
+                  <Box
                     sx={{
                       mr: 2,
                       display: { xs: "flex", md: "none" },
                     }}
                   >
                     <Logo />
-                  </Typography>
+                  </Box>
                 </NavLink>
               </MenuItem>
               {pages.map((page) => (
