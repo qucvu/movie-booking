@@ -11,6 +11,7 @@ const CinemaDetails = lazy(
   () => import("Pages/Home/CinemaDetails/CinemaDetails")
 );
 const DetailPage = lazy(() => import("Pages/Detail/DetailPage"));
+const BookingPage = lazy(() => import("Pages/Booking/BookingPage"));
 function App() {
   return (
     <ErrorBoundary>
@@ -25,6 +26,7 @@ function App() {
                   path="detail/:movieName/:movieId"
                   element={<DetailPage />}
                 />
+                <Route path="booking" element={<BookingPage />} />
               </Route>
               <Route path="*" element={<Navigate to={"/"} />}></Route>
             </Routes>

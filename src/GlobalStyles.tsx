@@ -1,12 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 import { createGlobalStyle } from "styled-components";
 declare module "@mui/material/styles" {
-  interface Theme {
-    status: {
-      danger: React.CSSProperties["color"];
-    };
-  }
-
   interface Palette {
     paper: Palette["primary"];
   }
