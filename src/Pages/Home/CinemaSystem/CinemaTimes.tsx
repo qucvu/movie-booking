@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Cinema } from "Interfaces/Cinema";
+import { listFilm } from "Interfaces/Cinema";
 import { TabPanel, a11yProps } from "Pages/Home/CinemaSystem/Tabs";
 import { Box, Tab, Tabs } from "@mui/material";
 import styled from "@emotion/styled";
@@ -7,7 +7,7 @@ import CinemaBox from "./CinemaBox";
 import FilmBox from "./FilmBox";
 
 type Props = {
-  listCinema: Cinema[];
+  listCinema: any[];
 };
 
 const TabsCinemaAdress = styled(Tabs)`
@@ -125,17 +125,26 @@ const CinemaTimes = ({ listCinema }: Props) => {
       {listCinema.map((cinema, index) => {
         return (
           <StyledTabPanel key={cinema.maCumRap} value={value} index={index}>
-            {cinema.danhSachPhim.map((film) => {
-              if (film.dangChieu)
-                return (
-                  <FilmBox
-                    key={film.maPhim}
-                    nameFilm={film.tenPhim}
-                    timeFilm={film.lstLichChieuTheoPhim}
-                    imgFilm={film.hinhAnh}
-                  />
-                );
-            })}
+            {cinema.lichChieuPhim ? (
+              <FilmBox
+                key={cinema.maCumRap}
+                nameFilm={cinema.tenCumRap}
+                timeFilm={cinema.lichChieuPhim}
+                imgFilm={cinema.hinhAnh}
+              />
+            ) : (
+              cinema.danhSachPhim?.map((film: listFilm) => {
+                if (film.dangChieu)
+                  return (
+                    <FilmBox
+                      key={film.maPhim}
+                      nameFilm={film.tenPhim}
+                      timeFilm={film.lstLichChieuTheoPhim}
+                      imgFilm={film.hinhAnh}
+                    />
+                  );
+              })
+            )}
           </StyledTabPanel>
         );
       })}

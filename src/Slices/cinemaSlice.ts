@@ -1,14 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { Cinema, CinemaSystem } from "Interfaces/Cinema";
 import CinemaAPI from "Services/cinemaAPI";
-interface initialState {
+interface State {
   cinemaSystems: CinemaSystem[];
   selectedCinema: CinemaSystem | null;
   isLoading: boolean;
   error: string | null;
 }
 
-const initialState: initialState = {
+const initialState: State = {
   cinemaSystems: [],
   selectedCinema: null,
   isLoading: false,

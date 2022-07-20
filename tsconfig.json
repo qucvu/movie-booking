@@ -27,6 +27,6 @@
     "strictNullChecks": true
   },
   "include": [
-    "src","@types"
+    "src", "@types"
   ]
 }

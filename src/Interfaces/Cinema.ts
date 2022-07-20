@@ -30,4 +30,20 @@ export interface ShowtimesFilm {
   tenRap: string;
   ngayChieuGioChieu: string;
   giaVe: number;
+  thoiLuong?: 120;
+}
+
+export interface MovieCluster {
+  lichChieuPhim?: ShowtimesFilm[];
+  maCumRap: string;
+  tenCumRap: string;
+  hinhAnh: string;
+  diaChi: string;
+}
+
+export interface MovieClusterSystem {
+  cumRapChieu: MovieCluster[];
+  maHeThongRap: string;
+  tenHeThongRap: string;
+  logo: string;
 }

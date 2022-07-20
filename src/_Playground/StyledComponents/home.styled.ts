@@ -25,6 +25,9 @@ export const ButtonPlay = styled.button`
     color: ${theme.palette.secondary.main};
     transition: all ease 0.4s;
   }
+  @media screen and (max-width: 768px) {
+    display: "none";
+  }
 `;
 export const TrailerModalBox = styled.div`
   position: absolute;
@@ -32,6 +35,15 @@ export const TrailerModalBox = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 800px;
+  height: 400px;
+  @media screen and (max-width: 768px) {
+    width: 500px;
+    height: 350px;
+  }
+  @media screen and (max-width: 576px) {
+    width: 300px;
+    height: 200px;
+  }
 `;
 //HEADER
 export const HeaderAside = styled(Menu)`
@@ -56,12 +68,12 @@ export const HeaderAside = styled(Menu)`
         background-color: ${theme.palette.secondary.dark};
         color: white;
       }
-    }
-    li:first-child {
-      background-color: ${theme.palette.secondary.dark};
-      height: 30%;
-      display: flex;
-      justify-content: center;
+      &:first-of-type {
+        background-color: ${theme.palette.secondary.dark};
+        height: 30%;
+        display: flex;
+        justify-content: center;
+      }
     }
   }
 `;

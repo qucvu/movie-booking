@@ -29,6 +29,9 @@ html {
   font-size: 16px;
   scroll-behavior: smooth;
 }
+a{
+  text-decoration: none;
+}
 
 `;
 

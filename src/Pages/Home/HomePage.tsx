@@ -1,9 +1,9 @@
-import Header from "Components/Header/Header";
+// import Header from "Components/Header/Header";
 import { Fragment } from "react";
 import AppDesc from "./AppDesc/AppDesc";
 import Banner from "./Banner/Banner";
 import CinemaSystem from "./CinemaSystem/CinemaSystem";
-import Footer from "./Footer/Footer";
+import FooterCommon from "./Footer/FooterCommon";
 import MovieShowing from "./MovieShowing/MovieShowing";
 import NewsSystem from "./NewsSystem/NewsSystem";
 import SearchBooking from "./SearchBooking/SearchBooking";
@@ -13,13 +13,13 @@ type Props = {};
 const HomePage = (props: Props) => {
   return (
     <Fragment>
-      {/* <Banner /> */}
-      {/* <MovieShowing /> */}
+      <Banner />
+      <MovieShowing />
       <SearchBooking />
       <CinemaSystem />
-
-      {/* <NewsSystem /> */}
-      {/* <AppDesc /> */}
+      <NewsSystem />
+      <AppDesc />
+      <FooterCommon />
     </Fragment>
   );
 };
