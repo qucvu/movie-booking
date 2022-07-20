@@ -19,7 +19,9 @@ const TextFooter = styled(Typography)`
 `;
 const CompanyInfo = (props: Props) => {
   return (
-    <div>
+    <Box
+      sx={{ backgroundColor: "#212121", color: "#fff", padding: "1.2rem 0" }}
+    >
       <Container maxWidth="lg">
         <Box
           sx={{
@@ -66,7 +68,7 @@ const CompanyInfo = (props: Props) => {
           </Grid>
         </Grid>
       </Container>
-    </div>
+    </Box>
   );
 };
 

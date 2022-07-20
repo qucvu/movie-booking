@@ -25,6 +25,9 @@ export const ButtonPlay = styled.button`
     color: ${theme.palette.secondary.main};
     transition: all ease 0.4s;
   }
+  @media screen and (max-width: 768px) {
+    display: "none";
+  }
 `;
 export const TrailerModalBox = styled.div`
   position: absolute;

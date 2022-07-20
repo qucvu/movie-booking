@@ -7,14 +7,18 @@ import { TabPanel, a11yProps } from "Pages/Home/CinemaSystem/Tabs";
 import styled from "@emotion/styled";
 import CinemaTimes from "./CinemaTimes";
 import { Movie } from "Interfaces/movieInterfaces";
+import ErrorAPI from "Components/ErrorAPI/ErrorAPI";
+import LoadingAPI from "Components/LoadingAPI/LoadingAPI";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   movie?: Movie | null | undefined;
 };
 
 const ImgCinema = styled.img`
-  width: 3.5rem;
+  width: 2.75rem;
   color: transparent;
+  margin: 0 auto;
 `;
 
 const StyledTabs = styled(Tabs)`
@@ -51,12 +55,25 @@ const StyledTabPanel = styled(TabPanel)`
     width: 100%;
   }
 `;
+const Detail = styled("p")`
+  color: #fb4226;
+  font-size: 0.8rem;
+  text-decoration: none;
+  font-weight: 500;
+  width: 5rem;
+  margin-top: 0.5rem;
+  &:hover {
+    color: #000;
+    font-weight: 700;
+  }
+`;
+
 const CinemaSystem = ({ movie }: Props) => {
-  const { cinemaSystems, error } = useSelector(
+  const { cinemaSystems, error, isLoading } = useSelector(
     (state: RootState) => state.cinema
   );
+  const navigate = useNavigate();
   const [value, setValue] = useState(0);
-  console.log(movie);
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     if (!movie) dispatch(getCinemaSystem());
@@ -66,11 +83,11 @@ const CinemaSystem = ({ movie }: Props) => {
   };
 
   if (error) {
-    return <h1>{error}</h1>;
+    return <ErrorAPI />;
   }
-
+  if (isLoading) return <LoadingAPI />;
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ my: 5 }}>
       <Paper elevation={20} sx={{ borderTop: "1px solid #ccc" }}>
         <Box
           sx={{
@@ -92,10 +109,17 @@ const CinemaSystem = ({ movie }: Props) => {
                     <StyledTab
                       key={cinema.maHeThongRap}
                       label={
-                        <ImgCinema
-                          src={cinema.logo}
-                          alt={cinema.tenHeThongRap}
-                        />
+                        <Box>
+                          <ImgCinema
+                            src={cinema.logo}
+                            alt={cinema.tenHeThongRap}
+                          />
+                          <Detail
+                            onClick={() => navigate(`/${cinema.maHeThongRap}`)}
+                          >
+                            [Chi Tiết]
+                          </Detail>
+                        </Box>
                       }
                       {...a11yProps(index)}
                     />
@@ -106,10 +130,17 @@ const CinemaSystem = ({ movie }: Props) => {
                     <StyledTab
                       key={cinema.maHeThongRap}
                       label={
-                        <ImgCinema
-                          src={cinema.logo}
-                          alt={cinema.tenHeThongRap}
-                        />
+                        <Box>
+                          <ImgCinema
+                            src={cinema.logo}
+                            alt={cinema.tenHeThongRap}
+                          />
+                          <Detail
+                            onClick={() => navigate(`/${cinema.maHeThongRap}`)}
+                          >
+                            [Chi Tiết]
+                          </Detail>
+                        </Box>
                       }
                       {...a11yProps(index)}
                     />

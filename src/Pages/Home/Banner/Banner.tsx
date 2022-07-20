@@ -69,7 +69,7 @@ const Banner = () => {
     appendDots: (dots: any) => (
       <div
         style={{
-          bottom: "2%",
+          bottom: "5%",
         }}
       >
         <ul style={{ padding: 0 }}>{dots}</ul>
@@ -81,6 +81,13 @@ const Banner = () => {
         breakpoint: 768,
         settings: {
           arrows: false,
+        },
+      },
+      {
+        breakpoint: 576,
+        settings: {
+          arrows: false,
+          dots: false,
         },
       },
     ],

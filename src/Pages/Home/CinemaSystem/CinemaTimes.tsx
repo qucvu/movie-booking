@@ -13,6 +13,7 @@ type Props = {
 const TabsCinemaAdress = styled(Tabs)`
   height: 35rem;
   min-width: 15rem;
+  max-width: 15rem;
   border-right: 1px solid #ccc;
   @media screen and (max-width: 700px) {
     min-width: 100%;
@@ -96,7 +97,7 @@ const CinemaTimes = ({ listCinema }: Props) => {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-  console.log(listCinema);
+
   return (
     <Box
       sx={{
@@ -114,12 +115,7 @@ const CinemaTimes = ({ listCinema }: Props) => {
           return (
             <TabCinemaAdress
               key={cinema.maCumRap}
-              label={
-                <CinemaBox
-                  cinemaName={cinema.tenCumRap}
-                  cinemaAddress={cinema.diaChi}
-                />
-              }
+              label={<CinemaBox cinema={cinema} />}
               {...a11yProps(index)}
             />
           );
@@ -138,14 +134,15 @@ const CinemaTimes = ({ listCinema }: Props) => {
               />
             ) : (
               cinema.danhSachPhim?.map((film: listFilm) => {
-                return (
-                  <FilmBox
-                    key={film.maPhim}
-                    nameFilm={film.tenPhim}
-                    timeFilm={film.lstLichChieuTheoPhim}
-                    imgFilm={film.hinhAnh}
-                  />
-                );
+                if (film.dangChieu)
+                  return (
+                    <FilmBox
+                      key={film.maPhim}
+                      nameFilm={film.tenPhim}
+                      timeFilm={film.lstLichChieuTheoPhim}
+                      imgFilm={film.hinhAnh}
+                    />
+                  );
               })
             )}
           </StyledTabPanel>

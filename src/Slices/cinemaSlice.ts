@@ -1,24 +1,38 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { CinemaSystem } from "Interfaces/Cinema";
+import { Cinema, CinemaSystem } from "Interfaces/Cinema";
 import CinemaAPI from "Services/cinemaAPI";
 interface State {
   cinemaSystems: CinemaSystem[];
+  selectedCinema: CinemaSystem | null;
   isLoading: boolean;
   error: string | null;
 }
 
 const initialState: State = {
   cinemaSystems: [],
+  selectedCinema: null,
   isLoading: false,
   error: null,
 };
 
 export const getCinemaSystem = createAsyncThunk(
-  "cinema/getCinemaShowing",
+  "cinema/getCinemaSystems",
   async (values, { rejectWithValue }) => {
     try {
       const data = await CinemaAPI.getCinemaSystem();
       return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const getCinemaDetails = createAsyncThunk(
+  "cinema/getCinemaDetails",
+  async (values: string | undefined, { rejectWithValue }) => {
+    try {
+      const data = await CinemaAPI.getCinemaSystem(values);
+      return data[0];
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -48,14 +62,30 @@ const cinemaSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getCinemaSystem.fulfilled, (state, { payload }) => {
       state.cinemaSystems = payload;
+      state.isLoading = false;
+    });
+    builder.addCase(getCinemaSystem.pending, (state) => {
+      state.isLoading = true;
     });
     builder.addCase(getCinemaSystem.rejected, (state, { error }) => {
+      state.isLoading = false;
+      if (typeof error === "string") {
+        state.error = error;
+      }
+    });
+    builder.addCase(getCinemaDetails.fulfilled, (state, { payload }) => {
+      state.selectedCinema = payload;
+      state.isLoading = false;
+    });
+    builder.addCase(getCinemaDetails.pending, (state) => {
       state.isLoading = true;
+    });
+    builder.addCase(getCinemaDetails.rejected, (state, { error }) => {
+      state.isLoading = false;
       if (typeof error === "string") {
         state.error = error;
       }
     });
   },
 });
-
 export default cinemaSlice.reducer;

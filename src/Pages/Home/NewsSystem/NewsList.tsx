@@ -1,11 +1,7 @@
-import { Box, Grid, Link, Typography } from "@mui/material";
-import { Container } from "@mui/system";
+import { Box, Grid, Link } from "@mui/material";
 import styled from "@emotion/styled";
-import { ReviewAPIs } from "./NewsAPI";
-import { isBuffer } from "lodash";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import CommentIcon from "@mui/icons-material/Comment";
-import useMediaQuery from "@mui/material/useMediaQuery";
 
 interface news {
   type?: number;
@@ -76,12 +72,19 @@ const NewsList = ({ list, reactData }: Props) => {
               </Link>
               <Desc>{item.description}</Desc>
               {reactData && (
-                <Box display="flex">
+                <Box display="flex" alignItems="center">
                   <ThumbUpAltIcon />
                   10
-                  <Box component="span" ml={2}>
-                    <CommentIcon />
-                    20
+                  <Box
+                    component="span"
+                    ml={2}
+                    display="flex"
+                    alignItems="center"
+                  >
+                    <CommentIcon fontSize="small" />
+                    <Box component="span" width="25px" textAlign="center">
+                      20
+                    </Box>
                   </Box>
                 </Box>
               )}

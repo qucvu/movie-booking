@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
+  ButtonDetail,
   ButtonPlay,
   CardBox,
   CardOverlay,
@@ -59,7 +60,7 @@ const DetailBanner = (props: Props) => {
   const formatDay = (date: string | undefined) => {
     return dayjs(date).format("DD-MM-YYYY");
   };
-  console.log(movie);
+
   return (
     <Container sx={{ py: 5, position: "relative" }}>
       <Grid container spacing={2}>
@@ -84,7 +85,6 @@ const DetailBanner = (props: Props) => {
                     onClick={() => {
                       handleOpen();
                     }}
-                    style={{ top: "50%" }}
                   >
                     <PlayArrowIcon
                       sx={{
@@ -92,6 +92,9 @@ const DetailBanner = (props: Props) => {
                       }}
                     />
                   </ButtonPlay>
+                  <ButtonDetail>
+                    <Typography>Đặt vé</Typography>
+                  </ButtonDetail>
                 </CardActions>
                 <Modal open={open} onClose={handleClose}>
                   <Box>
