@@ -1,6 +1,5 @@
-import { createTheme } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 import { createGlobalStyle } from "styled-components";
-
 declare module "@mui/material/styles" {
   interface Palette {
     paper: Palette["primary"];

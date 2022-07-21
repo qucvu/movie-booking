@@ -87,7 +87,7 @@ const CinemaSystem = ({ movie }: Props) => {
   }
   if (isLoading) return <LoadingAPI />;
   return (
-    <Box sx={{ py: 5, bgcolor: "paper.main" }}>
+    <Box id="theater" sx={{ py: 5, bgcolor: "paper.main" }}>
       <Container maxWidth="lg">
         <Paper elevation={20} sx={{ borderTop: "1px solid #ccc" }}>
           <Box
@@ -96,6 +96,7 @@ const CinemaSystem = ({ movie }: Props) => {
               borderLeft: "1px solid #ccc",
               borderRight: "1px solid #ccc",
               maxHeight: "35rem",
+              width: "100%",
             }}
           >
             <StyledTabs

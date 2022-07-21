@@ -71,7 +71,7 @@ const NewsSystem = (props: Props) => {
   };
 
   return (
-    <Box sx={{ py: 5, bgcolor: "paper.main" }}>
+    <Box id="news" sx={{ py: 5, bgcolor: "paper.main" }}>
       <Container maxWidth="lg">
         <Box sx={{ width: "100%" }}>
           <Box>

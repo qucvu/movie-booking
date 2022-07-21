@@ -12,6 +12,7 @@ const CinemaDetails = lazy(
   () => import("Pages/Home/CinemaDetails/CinemaDetails")
 );
 const DetailPage = lazy(() => import("Pages/Detail/DetailPage"));
+const BookingPage = lazy(() => import("Pages/Booking/BookingPage"));
 const Login = lazy(() => import("Pages/Login/Login"));
 const Register = lazy(() => import("Pages/Register/Register"));
 function App() {
@@ -23,11 +24,13 @@ function App() {
             <Routes>
               <Route path="" element={<HomeTemplate />}>
                 <Route index element={<HomePage />} />
-                <Route path=":cinemaId" element={<CinemaDetails />}></Route>
-                <Route
-                  path="detail/:movieName/:movieId"
-                  element={<DetailPage />}
-                />
+                <Route path="/cinemaId" element={<CinemaDetails />}></Route>
+                <Route path="detail" element={<DetailPage />}>
+                  <Route path=":movieName/:movieId" element={<DetailPage />} />
+                </Route>
+                <Route path="booking" element={<BookingPage />}>
+                  <Route path=":scheduleId" element={<BookingPage />} />
+                </Route>
               </Route>
               <Route path="/form" element={<FormTemplate />}>
                 <Route path=":sign-in" element={<Login />} />
