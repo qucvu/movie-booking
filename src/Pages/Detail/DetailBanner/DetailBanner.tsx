@@ -52,6 +52,7 @@ const DetailBanner = (props: Props) => {
     return <ErrorAPI />;
   }
 
+  console.log(movie);
   const handleOpen = () => {
     setOpen(true);
   };

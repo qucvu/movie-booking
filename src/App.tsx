@@ -22,11 +22,12 @@ function App() {
               <Route path="" element={<HomeTemplate />}>
                 <Route index element={<HomePage />} />
                 <Route path=":cinemaId" element={<CinemaDetails />}></Route>
-                <Route
-                  path="detail/:movieName/:movieId"
-                  element={<DetailPage />}
-                />
-                <Route path="booking" element={<BookingPage />} />
+                <Route path="detail" element={<DetailPage />}>
+                  <Route path=":movieName/:movieId" element={<DetailPage />} />
+                </Route>
+                <Route path="booking" element={<BookingPage />}>
+                  <Route path=":scheduleId" element={<BookingPage />} />
+                </Route>
               </Route>
               <Route path="*" element={<Navigate to={"/"} />}></Route>
             </Routes>

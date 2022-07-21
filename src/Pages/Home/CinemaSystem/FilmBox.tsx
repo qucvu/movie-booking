@@ -1,7 +1,9 @@
-import { Box, Card, Grid } from "@mui/material";
+import { Box, Button, Card, Grid } from "@mui/material";
 import { ShowtimesFilm } from "Interfaces/Cinema";
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
+
 type Props = {
   nameFilm: string;
   timeFilm: ShowtimesFilm[];
@@ -72,6 +74,7 @@ const StyledDay = styled.span`
 `;
 
 const FilmBox = ({ nameFilm, timeFilm, imgFilm }: Props) => {
+  const navigate = useNavigate();
   const formatDay = (date: string) => {
     return dayjs(date).format("DD-MM-YYYY");
   };
@@ -95,10 +98,18 @@ const FilmBox = ({ nameFilm, timeFilm, imgFilm }: Props) => {
           {timeFilm.map((time) => {
             return (
               <Grid item xs={12} md={6} key={time.maLichChieu}>
-                <StyledCard>
-                  <StyledDay>{formatDay(time.ngayChieuGioChieu)}</StyledDay>~
-                  <StyledTime>{formatTime(time.ngayChieuGioChieu)}</StyledTime>
-                </StyledCard>
+                <Button
+                  onClick={() => {
+                    navigate(`/booking/${time.maLichChieu}`);
+                  }}
+                >
+                  <StyledCard>
+                    <StyledDay>{formatDay(time.ngayChieuGioChieu)}</StyledDay>~
+                    <StyledTime>
+                      {formatTime(time.ngayChieuGioChieu)}
+                    </StyledTime>
+                  </StyledCard>
+                </Button>
               </Grid>
             );
           })}
