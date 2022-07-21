@@ -5,12 +5,15 @@ import ErrorBoundary from "Components/ErrorBoundary/ErrorBoundary";
 import HomeTemplate from "Templates/HomeTemplate";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import LoadingLazy from "Components/LoadingLazy/LoadingLazy";
+import FormTemplate from "Templates/FormTemplate";
 
 const HomePage = lazy(() => import("Pages/Home/HomePage"));
 const CinemaDetails = lazy(
   () => import("Pages/Home/CinemaDetails/CinemaDetails")
 );
 const DetailPage = lazy(() => import("Pages/Detail/DetailPage"));
+const Login = lazy(() => import("Pages/Login/Login"));
+const Register = lazy(() => import("Pages/Register/Register"));
 function App() {
   return (
     <ErrorBoundary>
@@ -25,6 +28,10 @@ function App() {
                   path="detail/:movieName/:movieId"
                   element={<DetailPage />}
                 />
+              </Route>
+              <Route path="/form" element={<FormTemplate />}>
+                <Route path=":sign-in" element={<Login />} />
+                <Route path=":sign-up" element={<Register />} />
               </Route>
               <Route path="*" element={<Navigate to={"/"} />}></Route>
             </Routes>

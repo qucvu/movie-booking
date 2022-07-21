@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { Box, Tab, Tabs } from "@mui/material";
+
 import { listFilm } from "Interfaces/Cinema";
 import { TabPanel, a11yProps } from "Pages/Home/CinemaSystem/Tabs";
-import { Box, Tab, Tabs } from "@mui/material";
 import styled from "@emotion/styled";
 import CinemaBox from "./CinemaBox";
 import FilmBox from "./FilmBox";
