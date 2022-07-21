@@ -24,10 +24,12 @@ const GlobalStyles = createGlobalStyle`
   box-sizing: border-box;
   font-family: "Roboto", sans-serif !important;
 }
-
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+}
+a{
+  text-decoration: none;
 }
 
 `;

@@ -39,6 +39,7 @@ export const CustomSlickDots = styled("button")`
   width: auto !important;
   height: auto !important;
   transition: all ease 0.4s;
+  bottom: 50px;
   & > * {
     transition: all ease 0.4s;
   }

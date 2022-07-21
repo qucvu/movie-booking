@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Box, Card, Grid, Typography } from "@mui/material";
+import { Box, Card, Grid } from "@mui/material";
 import dayjs from "dayjs";
 import { listFilm } from "Interfaces/Cinema";
 

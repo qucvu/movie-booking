@@ -1,19 +1,18 @@
-import { Box } from "@mui/material";
 import Header from "Components/Header/Header";
+import CompanyInfo from "Pages/Home/Footer/CompanyInfo";
 import { Fragment } from "react";
 import { Outlet } from "react-router-dom";
-import FooterCommon from "./Footer/FooterCommon";
 
 type Props = {};
 
-const CinemaApp = (props: Props) => {
+const HomeTemplate = (props: Props) => {
   return (
     <Fragment>
       <Header />
       <Outlet />
-      <FooterCommon />
+      <CompanyInfo />
     </Fragment>
   );
 };
 
-export default CinemaApp;
+export default HomeTemplate;

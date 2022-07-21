@@ -1,8 +1,7 @@
-import { Box, Grid, Link, Typography } from "@mui/material";
+import { Box, Grid, Link } from "@mui/material";
 import styled from "@emotion/styled";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import CommentIcon from "@mui/icons-material/Comment";
-import useMediaQuery from "@mui/material/useMediaQuery";
 
 interface news {
   type?: number;

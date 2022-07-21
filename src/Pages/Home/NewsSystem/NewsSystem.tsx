@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Box from "@mui/material/Box";
-import { Button, CircularProgress, Container } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  Container,
+  Tabs,
+  Tab,
+  Box,
+} from "@mui/material";
 import styled from "@emotion/styled";
 import { CouponAPIs, ReviewAPIs, FilmsAPI } from "./NewsAPI";
 import NewsList from "./NewsList";
@@ -67,7 +71,7 @@ const NewsSystem = (props: Props) => {
   };
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ my: 5 }}>
       <Box sx={{ width: "100%" }}>
         <Box>
           <StyledTabs

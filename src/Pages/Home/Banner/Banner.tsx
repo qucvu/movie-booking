@@ -19,6 +19,7 @@ import TrailerModal from "../TrailerModal";
 
 const Banner = () => {
   const [open, setOpen] = useState(false);
+  const [openPopup, setOpenPopup] = useState(true);
   const [movieId, setMovieId] = useState("");
 
   const dispatch = useDispatch<AppDispatch>();
@@ -33,23 +34,27 @@ const Banner = () => {
     if (movieId) dispatch(getMovieInfo(movieId));
     return () => {};
   }, [movieId, dispatch]);
-  console.log(movieError);
 
   if (isBannerLoading) {
     return <LoadingAPI />;
   }
 
-  if (bannerError) {
+  if (bannerError || movieError) {
     return <ErrorAPI />;
   }
 
-  console.log(bannerError);
   const handleOpen = (movieId: string) => {
     setMovieId(movieId);
     setOpen(true);
   };
   const handleClose = () => setOpen(false);
+  const handleClosePopup = () => setOpenPopup(false);
 
+  const randomImgBanner = () => {
+    let index = Math.floor(Math.random() * banners.length);
+    if (banners[index]) return banners[index].hinhAnh;
+    return undefined;
+  };
   const settings: Settings = {
     dots: true,
     arrows: true,
@@ -64,7 +69,7 @@ const Banner = () => {
     appendDots: (dots: any) => (
       <div
         style={{
-          bottom: "2%",
+          bottom: "5%",
         }}
       >
         <ul style={{ padding: 0 }}>{dots}</ul>
@@ -76,6 +81,13 @@ const Banner = () => {
         breakpoint: 768,
         settings: {
           arrows: false,
+        },
+      },
+      {
+        breakpoint: 576,
+        settings: {
+          arrows: false,
+          dots: false,
         },
       },
     ],
@@ -105,13 +117,18 @@ const Banner = () => {
               </ButtonPlay>
               <Modal open={open} onClose={handleClose}>
                 <Box>
-                  <TrailerModal movie={movie} />
+                  <TrailerModal trailer={movie?.trailer} />
                 </Box>
               </Modal>
             </BannerBox>
           </Box>
         ))}
       </Slider>
+      <Modal open={openPopup} onClose={handleClosePopup}>
+        <Box>
+          <TrailerModal image={randomImgBanner()} onClose={handleClosePopup} />
+        </Box>
+      </Modal>
     </section>
   );
 };

@@ -6,11 +6,14 @@ import { getCinemaSystem } from "Slices/cinemaSlice";
 import { TabPanel, a11yProps } from "Pages/Home/CinemaSystem/Tabs";
 import styled from "@emotion/styled";
 import CinemaTimes from "./CinemaTimes";
+import { Movie } from "Interfaces/movieInterfaces";
 import ErrorAPI from "Components/ErrorAPI/ErrorAPI";
 import LoadingAPI from "Components/LoadingAPI/LoadingAPI";
 import { useNavigate } from "react-router-dom";
 
-type Props = {};
+type Props = {
+  movie?: Movie | null | undefined;
+};
 
 const ImgCinema = styled.img`
   width: 2.75rem;
@@ -65,7 +68,7 @@ const Detail = styled("p")`
   }
 `;
 
-const CinemaSystem = (props: Props) => {
+const CinemaSystem = ({ movie }: Props) => {
   const { cinemaSystems, error, isLoading } = useSelector(
     (state: RootState) => state.cinema
   );
@@ -73,8 +76,8 @@ const CinemaSystem = (props: Props) => {
   const [value, setValue] = useState(0);
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    dispatch(getCinemaSystem());
-  }, [dispatch]);
+    if (!movie) dispatch(getCinemaSystem());
+  }, [dispatch, movie]);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
@@ -84,7 +87,7 @@ const CinemaSystem = (props: Props) => {
   }
   if (isLoading) return <LoadingAPI />;
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ my: 5 }}>
       <Paper elevation={20} sx={{ borderTop: "1px solid #ccc" }}>
         <Box
           sx={{
@@ -100,36 +103,73 @@ const CinemaSystem = (props: Props) => {
             aria-label="tabs cinema system"
             orientation="vertical"
           >
-            {cinemaSystems.map((cinema, index) => {
-              return (
-                <StyledTab
-                  key={cinema.maHeThongRap}
-                  label={
-                    <Box>
-                      <ImgCinema src={cinema.logo} alt={cinema.tenHeThongRap} />
-                      <Detail
-                        onClick={() => navigate(`/${cinema.maHeThongRap}`)}
-                      >
-                        [Chi Tiết]
-                      </Detail>
-                    </Box>
-                  }
-                  {...a11yProps(index)}
-                />
-              );
-            })}
+            {movie
+              ? movie.heThongRapChieu?.map((cinema, index) => {
+                  return (
+                    <StyledTab
+                      key={cinema.maHeThongRap}
+                      label={
+                        <Box>
+                          <ImgCinema
+                            src={cinema.logo}
+                            alt={cinema.tenHeThongRap}
+                          />
+                          <Detail
+                            onClick={() => navigate(`/${cinema.maHeThongRap}`)}
+                          >
+                            [Chi Tiết]
+                          </Detail>
+                        </Box>
+                      }
+                      {...a11yProps(index)}
+                    />
+                  );
+                })
+              : cinemaSystems.map((cinema, index) => {
+                  return (
+                    <StyledTab
+                      key={cinema.maHeThongRap}
+                      label={
+                        <Box>
+                          <ImgCinema
+                            src={cinema.logo}
+                            alt={cinema.tenHeThongRap}
+                          />
+                          <Detail
+                            onClick={() => navigate(`/${cinema.maHeThongRap}`)}
+                          >
+                            [Chi Tiết]
+                          </Detail>
+                        </Box>
+                      }
+                      {...a11yProps(index)}
+                    />
+                  );
+                })}
           </StyledTabs>
-          {cinemaSystems.map((cinema, index) => {
-            return (
-              <StyledTabPanel
-                key={cinema.maHeThongRap}
-                value={value}
-                index={index}
-              >
-                <CinemaTimes listCinema={cinema.lstCumRap} />
-              </StyledTabPanel>
-            );
-          })}
+          {movie
+            ? movie.heThongRapChieu?.map((cinema, index) => {
+                return (
+                  <StyledTabPanel
+                    key={cinema.maHeThongRap}
+                    value={value}
+                    index={index}
+                  >
+                    <CinemaTimes listCinema={cinema.cumRapChieu} />
+                  </StyledTabPanel>
+                );
+              })
+            : cinemaSystems.map((cinema, index) => {
+                return (
+                  <StyledTabPanel
+                    key={cinema.maHeThongRap}
+                    value={value}
+                    index={index}
+                  >
+                    <CinemaTimes listCinema={cinema.lstCumRap} />
+                  </StyledTabPanel>
+                );
+              })}
         </Box>
       </Paper>
     </Container>

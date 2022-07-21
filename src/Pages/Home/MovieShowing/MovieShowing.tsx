@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Tabs, Tab, Box, Container } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "configStore";
@@ -11,7 +11,7 @@ import ErrorAPI from "Components/ErrorAPI/ErrorAPI";
 import MovieShowingItem from "./MovieShowingItem";
 
 export default function BasicTabs() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const dispatch = useDispatch<AppDispatch>();
 

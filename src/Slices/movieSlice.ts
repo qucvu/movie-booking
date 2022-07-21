@@ -1,3 +1,4 @@
+import CinemaAPI from "Services/cinemaAPI";
 import { Banner, Movie } from "Interfaces/movieInterfaces";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import movieAPI from "Services/movieAPI";
@@ -39,13 +40,13 @@ export const getBannerShowing = createAsyncThunk(
 
 export const getMovieInfo = createAsyncThunk(
   `movie/getMovieInfo`,
-  async (payload: string, { rejectWithValue }) => {
+  async (payload: string) => {
     try {
       const data = await movieAPI.getMovieInfo(payload);
       return data;
     } catch (error) {
-      // throw error;
-      return rejectWithValue(error);
+      throw error;
+      // return rejectWithValue(error);
     }
   }
 );
@@ -61,6 +62,19 @@ export const getMovieShowing = createAsyncThunk(
     }
   }
 );
+
+export const getMovieShowtimeInfo = createAsyncThunk(
+  `cinema/getMovieShowtimeInfo`,
+  async (payload?: string) => {
+    try {
+      const data = await CinemaAPI.getMovieShowtimeInfo(payload);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
 const movieSlice = createSlice({
   name: "movie",
   initialState,
@@ -78,21 +92,16 @@ const movieSlice = createSlice({
       state.bannerError = error as any;
     });
     //----------------------------------------------------------------------
-    builder.addCase(getMovieInfo.pending, (state) => {
+    builder.addCase(getMovieShowtimeInfo.pending, (state) => {
       state.isMovieLoading = true;
     });
-    builder.addCase(getMovieInfo.fulfilled, (state, { payload }) => {
+    builder.addCase(getMovieShowtimeInfo.fulfilled, (state, { payload }) => {
       state.isMovieLoading = false;
       state.movie = payload;
     });
-    builder.addCase(getMovieInfo.rejected, (state, { error }) => {
-      console.log(error);
+    builder.addCase(getMovieShowtimeInfo.rejected, (state, { error }) => {
       state.isMovieLoading = false;
-      if (typeof error === "string") {
-        console.log(error);
-        state.movieError = error;
-      }
-      // state.movieError = error as any;
+      state.movieError = error as any;
     });
     //----------------------------------------------------------------------
     builder.addCase(getMovieShowing.pending, (state) => {
@@ -103,9 +112,20 @@ const movieSlice = createSlice({
       state.movies = payload;
     });
     builder.addCase(getMovieShowing.rejected, (state, { error }) => {
-      console.log(error);
       state.isMoviesLoading = false;
       state.moviesError = error as any;
+    });
+    //----------------------------------------------------------------------
+    builder.addCase(getMovieInfo.pending, (state) => {
+      state.isMovieLoading = true;
+    });
+    builder.addCase(getMovieInfo.fulfilled, (state, { payload }) => {
+      state.isMovieLoading = false;
+      state.movie = payload;
+    });
+    builder.addCase(getMovieInfo.rejected, (state, { error }) => {
+      state.isMovieLoading = false;
+      state.movieError = error as any;
     });
   },
 });

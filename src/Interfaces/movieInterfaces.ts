@@ -1,3 +1,4 @@
+import { MovieClusterSystem } from "./Cinema";
 export interface Banner {
   maBanner: number;
   maPhim: string;
@@ -17,4 +18,5 @@ export interface Movie {
   hot: boolean;
   dangChieu: boolean;
   sapChieu: boolean;
+  heThongRapChieu?: MovieClusterSystem[];
 }
