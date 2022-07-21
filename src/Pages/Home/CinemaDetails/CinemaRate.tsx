@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 import { Container } from "@mui/system";
 import StarIcon from "@mui/icons-material/Star";
 import StarRateIcon from "@mui/icons-material/StarRate";
-import { Fragment } from "react";
 type Props = {};
 
 const CommentBox = styled.div`
