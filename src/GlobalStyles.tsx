@@ -1,6 +1,14 @@
 import { createTheme } from "@mui/material";
 import { createGlobalStyle } from "styled-components";
 
+declare module "@mui/material/styles" {
+  interface Palette {
+    paper: Palette["primary"];
+  }
+  interface PaletteOptions {
+    paper: PaletteOptions["primary"];
+  }
+}
 export const theme = createTheme({
   palette: {
     primary: {
@@ -15,6 +23,7 @@ export const theme = createTheme({
       dark: "#c56200",
       contrastText: "#000",
     },
+    paper: { main: "#fdfcf0" },
   },
 });
 const GlobalStyles = createGlobalStyle`

@@ -35,7 +35,7 @@ const MovieShowingItem = ({ movie }: Props) => {
   const handleClose = () => setOpen(false);
 
   return (
-    <Card sx={{ p: 2, boxShadow: "none", maxWidth: 345 }}>
+    <Card sx={{ p: 2, boxShadow: "none", maxWidth: 345, bgcolor: "inherit" }}>
       <CardBox>
         <CardMedia
           component="img"
