@@ -8,6 +8,9 @@ const bookingAPI = {
       },
     });
   },
+  handleBookTickets: () => {
+    return axiosClient.post(`QuanLyDatVe/DatVe`);
+  },
 };
 
 export default bookingAPI;

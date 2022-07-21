@@ -63,6 +63,7 @@ const TabCinemaAdress = styled(Tab)`
   }
 `;
 const StyledTabPanel = styled(TabPanel)`
+  width: 100%;
   height: 35rem;
   @media screen and (max-width: 700px) {
     display: none;

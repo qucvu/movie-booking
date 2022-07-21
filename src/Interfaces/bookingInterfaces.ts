@@ -7,7 +7,6 @@ export interface Chair {
   giaVe: number;
   daDat: boolean;
   taiKhoanNguoiDat: string;
-  dangDat?: boolean;
 }
 
 export interface MovieInfo {

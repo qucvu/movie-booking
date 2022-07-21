@@ -94,7 +94,7 @@ const Banner = () => {
   };
 
   return (
-    <section>
+    <Box sx={{ mt: "5rem" }}>
       <Slider {...settings}>
         {banners?.map((banner) => (
           <Box key={banner.maBanner} style={{ paddingTop: "50%" }}>
@@ -129,7 +129,7 @@ const Banner = () => {
           <TrailerModal image={randomImgBanner()} onClose={handleClosePopup} />
         </Box>
       </Modal>
-    </section>
+    </Box>
   );
 };
 

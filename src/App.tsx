@@ -24,7 +24,7 @@ function App() {
             <Routes>
               <Route path="" element={<HomeTemplate />}>
                 <Route index element={<HomePage />} />
-                <Route path=":cinemaId" element={<CinemaDetails />}></Route>
+                <Route path="/cinemaId" element={<CinemaDetails />}></Route>
                 <Route path="detail" element={<DetailPage />}>
                   <Route path=":movieName/:movieId" element={<DetailPage />} />
                 </Route>

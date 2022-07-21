@@ -1,52 +1,50 @@
-import WeekendIcon from "@mui/icons-material/Weekend";
-import ChairIcon from "@mui/icons-material/Chair";
-import { Box, Grid, IconButton } from "@mui/material";
+import { Grid, IconButton } from "@mui/material";
 import { Chair } from "Interfaces/bookingInterfaces";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "configStore";
+import { ChairStyle } from "_Playground/StyledComponents/booking.styled";
+import { addChair, removeChair } from "Slices/bookingSlice";
+
 type Props = {
   chair: Chair;
 };
 
 const ChairItem = ({ chair }: Props) => {
-  const [choose, setChoose] = useState(chair.dangDat);
+  const [choose, setChoose] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    if (choose) {
+      dispatch(addChair(chair));
+    } else dispatch(removeChair(chair));
+    return () => {};
+  }, [choose]);
+
+  const renderIcon = (color: string, disabled: boolean = false) => {
+    return (
+      <IconButton
+        disabled={disabled}
+        onClick={() => {
+          setChoose(!choose);
+        }}
+      >
+        <ChairStyle fontSize="small" sx={{ p: 1, backgroundColor: color }}>
+          {chair.tenGhe}
+        </ChairStyle>
+      </IconButton>
+    );
+  };
 
   return (
     <Grid item xs={1} sx={{ position: "relative", textAlign: "center" }}>
-      <IconButton onClick={() => setChoose((state) => (state = !state))}>
-        {chair.loaiGhe === "Vip" ? (
-          chair.daDat ? (
-            <ChairIcon
-              fontSize="large"
-              color="error"
-              sx={{ cursor: "not-allowed" }}
-            />
-          ) : choose ? (
-            <ChairIcon fontSize="large" color="success" />
-          ) : (
-            <ChairIcon fontSize="large" color="primary" />
-          )
-        ) : chair.daDat ? (
-          <WeekendIcon
-            fontSize="large"
-            color="error"
-            sx={{ cursor: "not-allowed" }}
-          />
-        ) : choose ? (
-          <WeekendIcon fontSize="large" color="success" />
-        ) : (
-          <WeekendIcon fontSize="large" />
-        )}
-      </IconButton>
-
-      <Box
-        fontSize="small"
-        sx={{
-          position: "absolute",
-          top: "0",
-        }}
-      >
-        {chair.tenGhe}
-      </Box>
+      {chair.daDat
+        ? renderIcon("error.main", true)
+        : choose
+        ? renderIcon("success.main")
+        : chair.loaiGhe === "Vip"
+        ? renderIcon("warning.main")
+        : renderIcon("primary.main")}
     </Grid>
   );
 };
