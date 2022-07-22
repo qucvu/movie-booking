@@ -12,6 +12,8 @@ import {
   Container,
   InputAdornment,
   IconButton,
+  Alert,
+  CircularProgress,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";
@@ -22,17 +24,10 @@ import { LoginValues } from "Interfaces/Login";
 import { FieldErrors, useForm } from "react-hook-form";
 import { schemaLogin } from "./schemaLogin";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-// const BoxLogin = styled.div`
-//   background-color: #fff;
-//   padding: 2rem;
-//   border-radius: 8px;
-// `;
-
-// const Form = styled.form`
-//   display: flex;
-//   flex-direction: column;
-// `;
+import { loginUser } from "Slices/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "configStore";
+import SweetAlertSuccess from "Components/SweetAlert/SweetAlertSuccess";
 
 export const Copyright = () => {
   return (
@@ -91,6 +86,11 @@ export const handleMouseDownPassword = (
 
 const Login = (): JSX.Element => {
   const classes = useStyles();
+  const dispatch = useDispatch<AppDispatch>();
+  const [modalOpen, setModalOpen] = useState(false);
+  const { errorLogin, isLoading } = useSelector(
+    (state: RootState) => state.auth
+  );
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
@@ -104,8 +104,13 @@ const Login = (): JSX.Element => {
     mode: "onTouched",
     resolver: yupResolver(schemaLogin),
   });
-  const onSuccess = (values: LoginValues) => {
-    console.log(values);
+  const onSuccess = async (values: LoginValues) => {
+    try {
+      await dispatch(loginUser(values)).unwrap();
+      setModalOpen(true);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onError = (error: FieldErrors<LoginValues>) => {
@@ -113,6 +118,7 @@ const Login = (): JSX.Element => {
   };
   return (
     <Container component="main" maxWidth="sm">
+      <SweetAlertSuccess show={modalOpen} navigateDestination={"-1"} />;
       <div className={classes.paper}>
         <Avatar className={classes.avatar}></Avatar>
         <Typography component="h1" variant="h5" fontWeight="bold">
@@ -173,13 +179,18 @@ const Login = (): JSX.Element => {
             control={<Checkbox value="remember" color="error" />}
             label="Nhớ tài khoản"
           />
+          {errorLogin && (
+            <Alert severity="error" sx={{ fontWeight: "600" }}>
+              {errorLogin}
+            </Alert>
+          )}
           <Button
             fullWidth
             variant="contained"
             className={classes.submit}
             type="submit"
           >
-            ĐĂNG NHẬP
+            {isLoading ? <CircularProgress color="inherit" /> : "ĐĂNG NHẬP"}
           </Button>
           <Grid container>
             <Grid item xs>

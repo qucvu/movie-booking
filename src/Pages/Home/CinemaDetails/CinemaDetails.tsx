@@ -74,6 +74,7 @@ const CinemaDetails = (props: Props) => {
   const [active, setActive] = useState("");
   const [activePointer, setActivePointer] = useState(false);
   const { cinemaId } = useParams();
+
   const selectedCinema = useSelector(
     (state: RootState) => state.cinema.selectedCinema
   );

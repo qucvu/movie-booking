@@ -140,7 +140,7 @@ const CinemaSystem = ({ movie }: Props) => {
                             />
                             <Detail
                               onClick={() =>
-                                navigate(`/${cinema.maHeThongRap}`)
+                                navigate(`details/${cinema.maHeThongRap}`)
                               }
                             >
                               [Chi Tiết]

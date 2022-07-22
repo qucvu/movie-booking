@@ -1,7 +1,9 @@
 import {
+  Alert,
   Avatar,
   Box,
   Button,
+  CircularProgress,
   Container,
   IconButton,
   InputAdornment,
@@ -23,22 +25,25 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { schemaRegister } from "./schemaRegister";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "configStore";
+import { registerUser } from "Slices/auth";
+import SweetAlertSuccess from "Components/SweetAlert/SweetAlertSuccess";
+import SweetAlertError from "Components/SweetAlert/SweetAlertError";
 
 type Props = {};
-
-const onSubmit = (values: RegisterValues) => {
-  delete values["passwordConfirm"];
-  console.log(values);
-};
-
-const onError = (error: FieldErrors<RegisterValues>) => {
-  console.log(error);
-};
 
 const Register = (props: Props) => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [showPassWordConfirm, setShowPassWordConfirm] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalErrorOpen, setModalErrorOpen] = useState(false);
+
+  const dispatch = useDispatch<AppDispatch>();
+  const { errorRegister, isLoading } = useSelector(
+    (state: RootState) => state.auth
+  );
   const {
     register,
     handleSubmit,
@@ -55,8 +60,30 @@ const Register = (props: Props) => {
     mode: "onTouched",
     resolver: yupResolver(schemaRegister),
   });
+  const onSubmit = async (values: RegisterValues) => {
+    delete values["passwordConfirm"];
+    setModalErrorOpen(false);
+    try {
+      await dispatch(registerUser(values)).unwrap();
+      setModalOpen(true);
+    } catch (error) {
+      setModalErrorOpen(true);
+      console.log(error);
+    }
+  };
+
+  const onError = (error: FieldErrors<RegisterValues>) => {
+    console.log(error);
+  };
+
   return (
     <Container component="main" maxWidth="sm">
+      <SweetAlertSuccess
+        show={modalOpen}
+        navigateDestination={"/form/sign-in"}
+        title="Đăng ký thành công"
+        text="Đăng nhập ngay!"
+      />
       <Box
         className={classes.paper}
         sx={{ marginTop: { xs: "2rem", md: "0" } }}
@@ -67,6 +94,7 @@ const Register = (props: Props) => {
         <Typography component="h1" variant="h5" fontWeight="bold">
           Đăng ký
         </Typography>
+
         <form
           className={classes.form}
           onSubmit={handleSubmit(onSubmit, onError)}
@@ -193,7 +221,6 @@ const Register = (props: Props) => {
             id="email"
             label="Email"
             type="email"
-            autoComplete="email"
             color={errors.email && "warning"}
             {...register("email")}
           />
@@ -202,14 +229,23 @@ const Register = (props: Props) => {
               {errors.email.message}
             </Typography>
           )}
+          {errorRegister && (
+            <SweetAlertError show={modalErrorOpen} title={errorRegister} />
+          )}
+
           <Button
             fullWidth
             variant="contained"
             className={classes.submit}
             type="submit"
           >
-            ĐĂNG KÝ
+            {isLoading ? (
+              <CircularProgress color="inherit" size={"1.5rem"} />
+            ) : (
+              " ĐĂNG KÝ"
+            )}
           </Button>
+
           <Box textAlign="right">
             <NavLink to={"/form/sign-in"} className={classes.navLink}>
               {"Bạn đã có tài khoản? Đăng nhập"}

@@ -48,9 +48,9 @@ const DetailBanner = (props: Props) => {
     return <LoadingAPI />;
   }
 
-  if (movieError) {
-    return <ErrorAPI />;
-  }
+  // if (movieError) {
+  //   return <ErrorAPI />;
+  // }
 
   const handleOpen = () => {
     setOpen(true);

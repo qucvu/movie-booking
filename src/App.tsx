@@ -23,15 +23,15 @@ function App() {
             <Routes>
               <Route path="" element={<HomeTemplate />}>
                 <Route index element={<HomePage />} />
-                <Route path=":cinemaId" element={<CinemaDetails />}></Route>
+                <Route path="details/:cinemaId" element={<CinemaDetails />} />
                 <Route
                   path="detail/:movieName/:movieId"
                   element={<DetailPage />}
                 />
               </Route>
               <Route path="/form" element={<FormTemplate />}>
-                <Route path=":sign-in" element={<Login />} />
-                <Route path=":sign-up" element={<Register />} />
+                <Route path="sign-in" element={<Login />} />
+                <Route path="sign-up" element={<Register />} />
               </Route>
               <Route path="*" element={<Navigate to={"/"} />}></Route>
             </Routes>

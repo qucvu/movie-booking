@@ -1,4 +1,5 @@
 import axios, { AxiosError } from "axios";
+import store from "configStore";
 // import store from "configStore";
 const axiosClient = axios.create({
   baseURL: "https://movienew.cybersoft.edu.vn/api",
@@ -9,12 +10,13 @@ const axiosClient = axios.create({
 });
 
 axiosClient.interceptors.request.use((config) => {
-  // if (config.headers) {
-  //   const { accessToken = "" } = store.getState().authSlice.user || {};
-  //   if (accessToken) {
-  //     config.headers.Authorization = `Bearer ${accessToken}`;
-  //   }
-  // }
+  if (config.headers) {
+    const { accessToken = "" } = (store.getState().auth.user as any) || {};
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+  }
+
   return config;
 });
 
@@ -23,7 +25,9 @@ axiosClient.interceptors.response.use(
     return response.data.content;
   },
   (error: AxiosError<{ content: string }>) => {
-    // return error.response?.data.content;
+    // if (error.response) return error.response?.data.content;
+
+    return Promise.reject(error.response?.data.content);
   }
 );
 export default axiosClient;
