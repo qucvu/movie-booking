@@ -74,7 +74,7 @@ export default function BasicTabs() {
   };
 
   return (
-    <Box sx={{ py: 5, bgcolor: "paper.main" }}>
+    <Box id="schedule" sx={{ py: 5, bgcolor: "paper.main" }}>
       <Container>
         <Box sx={{ width: "100%" }}>
           <Box>

@@ -11,10 +11,9 @@ import { BreadcrumbText } from "_Playground/StyledComponents/detail.styled";
 type Props = {};
 
 const BreadcrumbNav = (props: Props) => {
-  // const { movieName } = useParams();
   const { movie } = useSelector((state: RootState) => state.movieSlice);
   return (
-    <Container sx={{ pt: 5 }} role="presentation">
+    <Container sx={{ pt: 5, mt: "5rem" }} role="presentation">
       <Breadcrumbs sx={{ mx: 5 }} color="primary.contrastText">
         <NavLink to={"/"}>
           <BreadcrumbText>

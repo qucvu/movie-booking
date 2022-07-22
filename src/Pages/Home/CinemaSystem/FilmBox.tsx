@@ -1,7 +1,9 @@
-import { Box, Card, Grid } from "@mui/material";
+import { Box, Button, Card, Grid } from "@mui/material";
 import { ShowtimesFilm } from "Interfaces/Cinema";
 import styled from "@emotion/styled";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
+
 type Props = {
   nameFilm: string;
   timeFilm: ShowtimesFilm[];
@@ -52,7 +54,7 @@ const StyledCard = styled(Card)`
   width: 80%;
   cursor: pointer;
   margin: 0px 16px 16px 0px;
-  padding: 8px;
+  padding: 0.8rem 0.5rem;
   border-radius: 4px;
   text-decoration: none;
   background-color: rgba(246, 245, 246, 0.9);
@@ -72,6 +74,7 @@ const StyledDay = styled.span`
 `;
 
 const FilmBox = ({ nameFilm, timeFilm, imgFilm }: Props) => {
+  const navigate = useNavigate();
   const formatDay = (date: string) => {
     return dayjs(date).format("DD-MM-YYYY");
   };
@@ -91,14 +94,28 @@ const FilmBox = ({ nameFilm, timeFilm, imgFilm }: Props) => {
       <Box sx={{ marginLeft: "2rem", width: "100%" }}>
         <StyledNumberCinema>C18</StyledNumberCinema>
         <StyledNameFlim>{nameFilm}</StyledNameFlim>
-        <Grid container>
+        <Grid container rowSpacing={2}>
           {timeFilm.map((time) => {
             return (
-              <Grid item xs={12} md={6} key={time.maLichChieu}>
+              <Grid
+                item
+                xs={12}
+                md={6}
+                key={time.maLichChieu}
+                onClick={() => {
+                  navigate(`/booking/${time.maLichChieu}`);
+                }}
+              >
+                {/* <Button
+                  onClick={() => {
+                    navigate(`/booking/${time.maLichChieu}`);
+                  }}
+                > */}
                 <StyledCard>
                   <StyledDay>{formatDay(time.ngayChieuGioChieu)}</StyledDay>~
                   <StyledTime>{formatTime(time.ngayChieuGioChieu)}</StyledTime>
                 </StyledCard>
+                {/* </Button> */}
               </Grid>
             );
           })}

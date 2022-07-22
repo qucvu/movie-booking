@@ -17,7 +17,7 @@ const WrappedAppDesc = styled(Box)`
 `;
 
 const AppDesc = (props: Props) => {
-  return <WrappedAppDesc children={<AppDescItem />} />;
+  return <WrappedAppDesc id="app" children={<AppDescItem />} />;
 };
 
 export default AppDesc;
