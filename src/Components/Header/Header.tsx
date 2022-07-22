@@ -19,6 +19,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { HeaderAside } from "_Playground/StyledComponents/home.styled";
 import { NavLink } from "react-router-dom";
 import Logo from "Components/Logo/Logo";
+import second from "react-to";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "configStore";
 
 const pages = [
   { name: "Lịch chiếu", id: "#schedule" },
@@ -31,6 +34,8 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 type Props = {};
 
 const Header = (props: Props) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { user } = useSelector((state: RootState) => state.auth);
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -139,39 +144,42 @@ const Header = (props: Props) => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {/* <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip> */}
-            <Stack direction="row">
-              <NavLink to={"/form/sign-in"}>
-                <Typography
-                  sx={{
-                    m: 2,
-                    color: "primary.contrastText",
-                    "&:hover": {
-                      color: "secondary.main",
-                    },
-                  }}
-                >
-                  Đăng nhập
-                </Typography>
-              </NavLink>
-              <NavLink to={"/form/sign-up"}>
-                <Typography
-                  sx={{
-                    m: 2,
-                    color: "primary.contrastText",
-                    "&:hover": {
-                      color: "secondary.main",
-                    },
-                  }}
-                >
-                  Đăng ký
-                </Typography>
-              </NavLink>
-            </Stack>
+            {user ? (
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Stack direction="row">
+                <NavLink to={"/form/sign-in"}>
+                  <Typography
+                    sx={{
+                      m: 2,
+                      color: "primary.contrastText",
+                      "&:hover": {
+                        color: "secondary.main",
+                      },
+                    }}
+                  >
+                    Đăng nhập
+                  </Typography>
+                </NavLink>
+                <NavLink to={"/form/sign-up"}>
+                  <Typography
+                    sx={{
+                      m: 2,
+                      color: "primary.contrastText",
+                      "&:hover": {
+                        color: "secondary.main",
+                      },
+                    }}
+                  >
+                    Đăng ký
+                  </Typography>
+                </NavLink>
+              </Stack>
+            )}
 
             <HeaderAside
               id="menu-appbar"

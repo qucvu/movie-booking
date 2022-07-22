@@ -39,9 +39,9 @@ const Banner = () => {
     return <LoadingAPI />;
   }
 
-  if (bannerError || movieError) {
-    return <ErrorAPI />;
-  }
+  // if (bannerError || movieError) {
+  //   return <ErrorAPI />;
+  // }
 
   const handleOpen = (movieId: string) => {
     setMovieId(movieId);

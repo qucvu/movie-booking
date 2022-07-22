@@ -54,7 +54,7 @@ const StyledCard = styled(Card)`
   width: 80%;
   cursor: pointer;
   margin: 0px 16px 16px 0px;
-  padding: 8px;
+  padding: 0.8rem 0.5rem;
   border-radius: 4px;
   text-decoration: none;
   background-color: rgba(246, 245, 246, 0.9);
@@ -94,22 +94,28 @@ const FilmBox = ({ nameFilm, timeFilm, imgFilm }: Props) => {
       <Box sx={{ marginLeft: "2rem", width: "100%" }}>
         <StyledNumberCinema>C18</StyledNumberCinema>
         <StyledNameFlim>{nameFilm}</StyledNameFlim>
-        <Grid container>
+        <Grid container rowSpacing={2}>
           {timeFilm.map((time) => {
             return (
-              <Grid item xs={12} md={6} key={time.maLichChieu}>
-                <Button
+              <Grid
+                item
+                xs={12}
+                md={6}
+                key={time.maLichChieu}
+                onClick={() => {
+                  navigate(`/booking/${time.maLichChieu}`);
+                }}
+              >
+                {/* <Button
                   onClick={() => {
                     navigate(`/booking/${time.maLichChieu}`);
                   }}
-                >
-                  <StyledCard>
-                    <StyledDay>{formatDay(time.ngayChieuGioChieu)}</StyledDay>~
-                    <StyledTime>
-                      {formatTime(time.ngayChieuGioChieu)}
-                    </StyledTime>
-                  </StyledCard>
-                </Button>
+                > */}
+                <StyledCard>
+                  <StyledDay>{formatDay(time.ngayChieuGioChieu)}</StyledDay>~
+                  <StyledTime>{formatTime(time.ngayChieuGioChieu)}</StyledTime>
+                </StyledCard>
+                {/* </Button> */}
               </Grid>
             );
           })}
