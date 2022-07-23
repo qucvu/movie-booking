@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Link, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Button, Grid, Tab, Tabs, Typography } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { RootState, AppDispatch } from "configStore";
@@ -14,10 +14,12 @@ import CinemaSchedule from "./CinemaSchedule";
 import CinemaInfo from "./CinemaInfo";
 import CinemaRate from "./CinemaRate";
 import LoadingLazy from "Components/LoadingLazy/LoadingLazy";
+import { Link } from "react-scroll";
 
 type Props = {};
 
 const WrappedDetailCinema = styled(Box)`
+  margin-top: 5rem;
   background-color: #fdfcf0;
   padding: 2rem 0;
 `;
@@ -142,10 +144,15 @@ const CinemaDetails = (props: Props) => {
                   <GpsFixedIcon />
                   {item.tenCumRap}
                   <Link
-                    href="#detailsAddress"
-                    underline="none"
+                    to="detailsAddress"
+                    spy={true}
+                    smooth={true}
+                    offset={-10}
+                    delay={100}
+                    duration={100}
                     onClick={() => {
                       handleCinemaAddress(item.maCumRap);
+                      setActive(item.maCumRap);
                       setValue(1);
                     }}
                   >
@@ -155,8 +162,11 @@ const CinemaDetails = (props: Props) => {
               );
             })}
             <Link
-              href="#booking"
-              underline="none"
+              to="booking"
+              spy={true}
+              smooth={true}
+              offset={-70}
+              duration={100}
               onClick={() => {
                 handleCinemaAddress(active);
                 setValue(0);

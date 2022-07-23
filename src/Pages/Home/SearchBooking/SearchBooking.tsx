@@ -25,6 +25,7 @@ const WrappedSelect = styled(Card)`
   padding: 1.2rem 1rem;
   border: 1px solid rgb(0, 0, 0, 0.3);
   background-color: #f0e88f;
+  margin-top: 3rem;
 `;
 const StyledSelect = styled(Select)`
   height: 100%;
