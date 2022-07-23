@@ -8,10 +8,19 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "configStore";
 import { BreadcrumbText } from "_Playground/StyledComponents/detail.styled";
+import { useEffect, useRef } from "react";
 type Props = {};
 
 const BreadcrumbNav = (props: Props) => {
+  const isMounted = useRef(false);
   const { movie } = useSelector((state: RootState) => state.movieSlice);
+  useEffect(() => {
+    if (!isMounted.current) {
+      isMounted.current = true;
+      return;
+    }
+    if (movie) document.title = movie.tenPhim;
+  }, [movie]);
   return (
     <Container sx={{ pt: 5, mt: "5rem" }} role="presentation">
       <Breadcrumbs sx={{ mx: 5 }} color="primary.contrastText">

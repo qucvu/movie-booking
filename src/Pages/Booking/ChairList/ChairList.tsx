@@ -21,13 +21,13 @@ const ChairList = (props: Props) => {
     (state: RootState) => state.bookingSlice
   );
 
-  if (isTicketRoomLoading) {
-    return <LoadingAPI />;
-  }
+  // if (isTicketRoomLoading) {
+  //   return <LoadingAPI />;
+  // }
 
-  if (ticketRoomError) {
-    return <ErrorAPI />;
-  }
+  // if (ticketRoomError) {
+  //   return <ErrorAPI />;
+  // }
 
   return (
     <Box>

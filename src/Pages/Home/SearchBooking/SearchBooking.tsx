@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "configStore";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 type Props = {};
 
@@ -24,6 +25,7 @@ const WrappedSelect = styled(Card)`
   padding: 1.2rem 1rem;
   border: 1px solid rgb(0, 0, 0, 0.3);
   background-color: #f0e88f;
+  margin-top: 3rem;
 `;
 const StyledSelect = styled(Select)`
   height: 100%;
@@ -75,7 +77,7 @@ const SearchBooking = (props: Props) => {
   const [cinema, setCinema] = useState("");
   const [day, setDay] = useState("");
   const [time, setTime] = useState("");
-
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const { movies, movie, isMovieLoading } = useSelector(
     (state: RootState) => state.movieSlice
@@ -263,6 +265,7 @@ const SearchBooking = (props: Props) => {
               height: "3.2rem",
               fontSize: { md: "0.7rem", xs: "0.55rem" },
             }}
+            onClick={() => navigate(`/booking/${time}`)}
           >
             Đặt vé ngay
           </Button>

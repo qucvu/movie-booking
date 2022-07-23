@@ -51,6 +51,7 @@ const StyledTab = styled(Tab)`
   }
 `;
 const StyledTabPanel = styled(TabPanel)`
+  width: 100%;
   @media screen and (max-width: 700px) {
     width: 100%;
   }
@@ -141,7 +142,7 @@ const CinemaSystem = ({ movie }: Props) => {
                             />
                             <Detail
                               onClick={() =>
-                                navigate(`/${cinema.maHeThongRap}`)
+                                navigate(`details/${cinema.maHeThongRap}`)
                               }
                             >
                               [Chi Tiết]

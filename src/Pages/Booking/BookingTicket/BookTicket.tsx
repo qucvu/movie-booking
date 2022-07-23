@@ -1,4 +1,5 @@
 import { Divider, Button, Modal, Box, Typography, Stack } from "@mui/material";
+import SweetAlertConfirm from "Components/SweetAlert/SweetAlertConfirm";
 import { RootState } from "configStore";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -80,7 +81,7 @@ const BookTicket = (props: Props) => {
         </BookingItem>
       </BookingItems>
 
-      <Modal open={open} onClose={handleClose}>
+      {/* <Modal open={open} onClose={handleClose}>
         <Box
           sx={{
             position: "absolute",
@@ -133,8 +134,16 @@ const BookTicket = (props: Props) => {
               Không
             </Button>
           </Stack>
-        </Box>
-      </Modal>
+        </Box> */}
+      {/* </Modal> */}
+      <SweetAlertConfirm
+        show={open}
+        icon="error"
+        title="Bạn chưa đăng nhập"
+        text="Bạn có muốn đăng nhập không?"
+        callbackConfirm={() => alert(123)}
+        callbackClose={() => setOpen(false)}
+      />
     </div>
   );
 };

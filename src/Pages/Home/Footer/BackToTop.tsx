@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import styled from "@emotion/styled";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import { useEffect, useState } from "react";
+import * as Scroll from "react-scroll";
 
 type Props = {};
 
@@ -23,6 +24,8 @@ const ButtonBackToTop = styled(Button)`
   }
 `;
 const BackToTop = (props: Props) => {
+  let scroll = Scroll.animateScroll;
+
   const [visibleCorrect, setVisible] = useState(false);
   const toggleVisible = () => {
     const scrolled = document.documentElement.scrollTop;
@@ -46,9 +49,10 @@ const BackToTop = (props: Props) => {
     //     ></ButtonBackToTop>
     //   )}
     // </Box>
+
     <ButtonBackToTop
       variant="contained"
-      href="#"
+      onClick={() => scroll.scrollToTop({ duration: "0" })}
       endIcon={<ArrowDropUpIcon />}
       sx={{
         opacity: visibleCorrect ? 1 : 0,
