@@ -25,9 +25,9 @@ const ChairList = (props: Props) => {
   //   return <LoadingAPI />;
   // }
 
-  if (ticketRoomError) {
-    return <ErrorAPI />;
-  }
+  // if (ticketRoomError) {
+  //   return <ErrorAPI />;
+  // }
 
   console.log(ticketRoom);
   return (

@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { Box, Card, Grid } from "@mui/material";
 import dayjs from "dayjs";
 import { listFilm } from "Interfaces/Cinema";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   listFilm: listFilm[];
@@ -69,6 +70,7 @@ const formatTime = (date: string) => {
 };
 
 const CinemaSchedule = ({ listFilm }: Props) => {
+  const navigate = useNavigate();
   return (
     <Box>
       {listFilm.map((film) => {
@@ -99,7 +101,11 @@ const CinemaSchedule = ({ listFilm }: Props) => {
                         xs={6}
                         key={item.maLichChieu}
                       >
-                        <BoxFilmTime>
+                        <BoxFilmTime
+                          onClick={() =>
+                            navigate(`/booking/${item.maLichChieu}`)
+                          }
+                        >
                           <StyledDay>
                             {formatDay(item.ngayChieuGioChieu)}
                           </StyledDay>

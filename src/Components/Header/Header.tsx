@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 
 import {
   Container,
@@ -11,23 +11,32 @@ import {
   Button,
   Tooltip,
   MenuItem,
-  Link,
   Stack,
+  // Link,
 } from "@mui/material";
+import {
+  Link,
+  Element,
+  Events,
+  animateScroll as scroll,
+  scrollSpy,
+  scroller,
+} from "react-scroll";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import { HeaderAside } from "_Playground/StyledComponents/home.styled";
 import { NavLink } from "react-router-dom";
+import { Link as LinkScroll } from "react-scroll";
+
 import Logo from "Components/Logo/Logo";
-import second from "react-to";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "configStore";
 
 const pages = [
-  { name: "Lịch chiếu", id: "#schedule" },
-  { name: "Cụm rạp", id: "#theater" },
-  { name: "Tin tức", id: "#news" },
-  { name: "Ứng dụng", id: "#app" },
+  { name: "Lịch chiếu", id: "schedule" },
+  { name: "Cụm rạp", id: "theater" },
+  { name: "Tin tức", id: "news" },
+  { name: "Ứng dụng", id: "app" },
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -107,18 +116,27 @@ const Header = (props: Props) => {
                 </NavLink>
               </MenuItem>
               {pages.map((page, index) => (
-                <MenuItem key={index} onClick={handleCloseNavMenu}>
-                  <Link
-                    key={index}
-                    underline="none"
-                    href={page.id}
+                <MenuItem
+                  key={index}
+                  onClick={() => {
+                    scroller.scrollTo(page.id, {
+                      duration: 0,
+                      smooth: true,
+                      offset: -70,
+                    });
+                    handleCloseNavMenu();
+                  }}
+                >
+                  <Typography
                     sx={{
                       m: 2,
-                      color: "primary.contrastText",
+                      // color: "primary.contrastText",
+                      cursor: "pointer",
+                      width: "100%",
                     }}
                   >
                     {page.name}
-                  </Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </HeaderAside>
@@ -126,20 +144,27 @@ const Header = (props: Props) => {
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page, index) => (
-              <Link
-                key={index}
-                underline="none"
-                href={page.id}
+              <Typography
                 sx={{
                   m: 2,
                   color: "primary.contrastText",
                   "&:hover": {
                     color: "secondary.main",
                   },
+                  cursor: "pointer",
                 }}
+                key={index}
               >
-                {page.name}
-              </Link>
+                <LinkScroll
+                  to={page.id}
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration={100}
+                >
+                  {page.name}
+                </LinkScroll>
+              </Typography>
             ))}
           </Box>
 
