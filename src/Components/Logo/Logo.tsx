@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
 import { Box, Typography } from "@mui/material";
-import LogoImg from "Assets/Logo/Logo.png";
+import LogoImg from "Assets/Logo/LogoImg.png";
 type Props = {};
 
 const ImageLogo = styled.img`
-  width: 3.5rem;
+  width: 7rem;
 `;
 const StyledLogo = styled(Box)`
   display: flex;
@@ -15,7 +15,11 @@ const StyledLogo = styled(Box)`
 const Logo = (props: Props) => {
   return (
     <StyledLogo>
-      <ImageLogo src={LogoImg} alt={LogoImg} />
+      <ImageLogo
+        // src="https://i.pinimg.com/564x/b3/7a/5a/b37a5a8a62db73381b9f2909bdb6545e.jpg"
+        src={LogoImg}
+        alt={LogoImg}
+      />
     </StyledLogo>
   );
 };

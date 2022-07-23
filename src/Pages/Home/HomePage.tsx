@@ -1,6 +1,6 @@
 // import Header from "Components/Header/Header";
 import SweetAlertConfirm from "Components/SweetAlert/SweetAlertConfirm";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import AppDesc from "./AppDesc/AppDesc";
 import Banner from "./Banner/Banner";
 import CinemaSystem from "./CinemaSystem/CinemaSystem";
@@ -10,6 +10,9 @@ import NewsSystem from "./NewsSystem/NewsSystem";
 import SearchBooking from "./SearchBooking/SearchBooking";
 type Props = {};
 const HomePage = (props: Props) => {
+  useEffect(() => {
+    document.title = "TIX - Đặt vé nhanh nhất";
+  }, []);
   return (
     <Fragment>
       <Banner />

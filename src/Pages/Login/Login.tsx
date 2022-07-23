@@ -16,7 +16,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 // import { makeStyles } from "@mui/styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -128,6 +128,10 @@ const Login = (): JSX.Element => {
   const onError = (error: FieldErrors<LoginValues>) => {
     console.log(error);
   };
+
+  useEffect(() => {
+    document.title = "Đăng nhập";
+  }, []);
   return (
     <Container component="main" maxWidth="sm">
       <SweetAlertSuccess show={modalOpen} navigateDestination={"-1"} />;

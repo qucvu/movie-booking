@@ -5,16 +5,25 @@ type Props = {
   show: boolean;
   title: string;
   text?: string;
-  callback: Function;
+  callbackConfirm: () => void;
+  callbackClose?: () => void;
+  icon?: string;
 };
 
-const SweetAlertConfirm = ({ show, title, text, callback }: Props) => {
+const SweetAlertConfirm = ({
+  show,
+  title,
+  text,
+  callbackConfirm,
+  callbackClose,
+  icon = "question",
+}: Props) => {
   const [swalProps, setSwalProps] = useState({});
   useEffect(() => {
     setSwalProps({
       show: show,
       position: "center",
-      icon: "question",
+      icon: icon,
       title: title,
       text: text,
       showCancelButton: true,
@@ -23,7 +32,13 @@ const SweetAlertConfirm = ({ show, title, text, callback }: Props) => {
       cancelButtonText: "Hủy bỏ",
     });
   }, [show]);
-  return <SweetAlert2 {...swalProps} onConfirm={callback} />;
+  return (
+    <SweetAlert2
+      {...swalProps}
+      onConfirm={callbackConfirm}
+      didClose={callbackClose}
+    />
+  );
 };
 
 export default SweetAlertConfirm;

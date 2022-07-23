@@ -20,7 +20,7 @@ import LockIcon from "@mui/icons-material/Lock";
 import { NavLink } from "react-router-dom";
 import { RegisterValues } from "Interfaces/Register";
 import { FieldErrors, useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { schemaRegister } from "./schemaRegister";
@@ -64,7 +64,8 @@ const Register = (props: Props) => {
     delete values["passwordConfirm"];
     setModalErrorOpen(false);
     try {
-      await dispatch(registerUser(values)).unwrap();
+      // await dispatch(registerUser(values)).unwrap();
+      await dispatch(registerUser({ ...values, maNhom: "GP01" })).unwrap();
       setModalOpen(true);
     } catch (error) {
       setModalErrorOpen(true);
@@ -76,6 +77,9 @@ const Register = (props: Props) => {
     console.log(error);
   };
 
+  useEffect(() => {
+    document.title = "Đăng kí";
+  }, []);
   return (
     <Container component="main" maxWidth="sm">
       <SweetAlertSuccess
