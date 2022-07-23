@@ -1,6 +1,6 @@
 import { Grid, IconButton } from "@mui/material";
 import { Chair } from "Interfaces/bookingInterfaces";
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "configStore";
 import { ChairStyle } from "_Playground/StyledComponents/booking.styled";
@@ -19,7 +19,8 @@ const ChairItem = ({ chair }: Props) => {
       dispatch(addChair(chair));
     } else dispatch(removeChair(chair));
     return () => {};
-  }, [choose]);
+  }, [choose, dispatch, chair]);
+  console.log("render");
 
   const renderIcon = (color: string, disabled: boolean = false) => {
     return (
@@ -49,4 +50,4 @@ const ChairItem = ({ chair }: Props) => {
   );
 };
 
-export default ChairItem;
+export default memo(ChairItem);
