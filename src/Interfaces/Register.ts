@@ -5,4 +5,5 @@ export interface RegisterValues {
   hoTen: string;
   soDt: string;
   passwordConfirm?: string;
+  maNhom?: string;
 }

@@ -13,6 +13,7 @@ import { Cinema } from "Interfaces/Cinema";
 import CinemaSchedule from "./CinemaSchedule";
 import CinemaInfo from "./CinemaInfo";
 import CinemaRate from "./CinemaRate";
+import LoadingLazy from "Components/LoadingLazy/LoadingLazy";
 
 type Props = {};
 
@@ -67,6 +68,7 @@ const StyledText = styled.span`
   }
 `;
 const CinemaDetails = (props: Props) => {
+  const isMounted = useRef(false);
   const [value, setValue] = useState(0);
   const [selectedCinemaAddress, setSelectedCinemaAddress] = useState<
     Cinema | undefined
@@ -75,14 +77,23 @@ const CinemaDetails = (props: Props) => {
   const [activePointer, setActivePointer] = useState(false);
   const { cinemaId } = useParams();
 
-  const selectedCinema = useSelector(
-    (state: RootState) => state.cinema.selectedCinema
+  const { selectedCinema, isLoading } = useSelector(
+    (state: RootState) => state.cinema
   );
 
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     dispatch(getCinemaDetails(cinemaId));
   }, []);
+
+  useEffect(() => {
+    if (!isMounted.current) {
+      isMounted.current = true;
+      return;
+    }
+    if (selectedCinema)
+      document.title = selectedCinema?.tenHeThongRap.toUpperCase();
+  }, [selectedCinema]);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
@@ -94,7 +105,7 @@ const CinemaDetails = (props: Props) => {
     setActivePointer(false);
     setSelectedCinemaAddress(selectedCinemaAddress);
   };
-
+  if (isLoading) return <LoadingLazy />;
   return (
     <WrappedDetailCinema>
       <Container maxWidth="lg">
@@ -115,6 +126,8 @@ const CinemaDetails = (props: Props) => {
                     fontWeight: "700",
                     marginBottom: "0.7rem",
                     cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
                     "&:hover": {
                       color: "#d32f2f",
                     },
@@ -131,7 +144,10 @@ const CinemaDetails = (props: Props) => {
                   <Link
                     href="#detailsAddress"
                     underline="none"
-                    onClick={() => handleCinemaAddress(item.maCumRap)}
+                    onClick={() => {
+                      handleCinemaAddress(item.maCumRap);
+                      setValue(1);
+                    }}
                   >
                     <StyledText>[Chi Tiết]</StyledText>
                   </Link>
@@ -141,7 +157,10 @@ const CinemaDetails = (props: Props) => {
             <Link
               href="#booking"
               underline="none"
-              onClick={() => handleCinemaAddress(active)}
+              onClick={() => {
+                handleCinemaAddress(active);
+                setValue(0);
+              }}
             >
               <Button
                 variant="contained"
