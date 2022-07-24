@@ -1,3 +1,4 @@
+import { ListTicket } from "Interfaces/bookingInterfaces";
 import axiosClient from "./axiosClient";
 
 const bookingAPI = {
@@ -8,8 +9,8 @@ const bookingAPI = {
       },
     });
   },
-  handleBookTickets: () => {
-    return axiosClient.post(`QuanLyDatVe/DatVe`);
+  handleBookTickets: (DanhSachVe: ListTicket) => {
+    return axiosClient.post(`QuanLyDatVe/DatVe`, DanhSachVe);
   },
 };
 

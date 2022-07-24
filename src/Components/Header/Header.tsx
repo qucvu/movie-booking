@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 
 import {
   Container,
@@ -8,20 +8,10 @@ import {
   IconButton,
   Typography,
   Avatar,
-  Button,
-  Tooltip,
   MenuItem,
   Stack,
-  // Link,
 } from "@mui/material";
-import {
-  Link,
-  Element,
-  Events,
-  animateScroll as scroll,
-  scrollSpy,
-  scroller,
-} from "react-scroll";
+import { scroller } from "react-scroll";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import { HeaderAside } from "_Playground/StyledComponents/home.styled";
@@ -30,7 +20,10 @@ import { Link as LinkScroll } from "react-scroll";
 
 import Logo from "Components/Logo/Logo";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "configStore";
+import { RootState } from "configStore";
+import SweetAlertConfirm from "Components/SweetAlert/SweetAlertConfirm";
+import { logoutUser } from "Slices/auth";
+import SweetAlertSuccess from "Components/SweetAlert/SweetAlertSuccess";
 
 const pages = [
   { name: "Lịch chiếu", id: "schedule" },
@@ -38,29 +31,29 @@ const pages = [
   { name: "Tin tức", id: "news" },
   { name: "Ứng dụng", id: "app" },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 type Props = {};
 
 const Header = (props: Props) => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<any>();
   const { user } = useSelector((state: RootState) => state.auth);
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-
+  const [open, setOpen] = useState(false);
+  const [openSuccess, setOpenSuccess] = useState(false);
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    setOpenSuccess(true);
   };
 
   return (
@@ -129,7 +122,7 @@ const Header = (props: Props) => {
                 >
                   <Typography
                     sx={{
-                      m: 2,
+                      m: 1,
                       // color: "primary.contrastText",
                       cursor: "pointer",
                       width: "100%",
@@ -170,11 +163,44 @@ const Header = (props: Props) => {
 
           <Box sx={{ flexGrow: 0 }}>
             {user ? (
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-              </Tooltip>
+              <Stack direction="row">
+                <NavLink to={"/user"}>
+                  <Stack direction="row">
+                    <IconButton sx={{ p: 0 }}>
+                      <Avatar
+                        alt="https://i.pravatar.cc"
+                        src="https://i.pravatar.cc"
+                      />
+                    </IconButton>
+
+                    <Typography
+                      sx={{
+                        m: 2,
+                        color: "primary.contrastText",
+                        "&:hover": {
+                          color: "secondary.main",
+                        },
+                      }}
+                    >
+                      {user.hoTen}
+                    </Typography>
+                  </Stack>
+                </NavLink>
+
+                <Typography
+                  sx={{
+                    m: 2,
+                    color: "primary.contrastText",
+                    cursor: "pointer",
+                    "&:hover": {
+                      color: "secondary.main",
+                    },
+                  }}
+                  onClick={handleOpen}
+                >
+                  Đăng xuất
+                </Typography>
+              </Stack>
             ) : (
               <Stack direction="row">
                 <NavLink to={"/form/sign-in"}>
@@ -205,34 +231,24 @@ const Header = (props: Props) => {
                 </NavLink>
               </Stack>
             )}
-
-            <HeaderAside
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <MenuItem>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </MenuItem>
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </HeaderAside>
           </Box>
         </Toolbar>
       </Container>
+      <SweetAlertConfirm
+        show={open}
+        icon="question"
+        title="Bạn muốn đăng xuất?"
+        text="Bạn có muốn đăng nhập không?"
+        callbackConfirm={() => {
+          handleLogout();
+        }}
+        callbackClose={handleClose}
+      />
+      <SweetAlertSuccess
+        show={openSuccess}
+        title="Đăng xuất thành công!"
+        navigateDestination={"-1"}
+      />
     </AppBar>
   );
 };

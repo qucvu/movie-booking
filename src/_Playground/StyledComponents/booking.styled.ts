@@ -9,6 +9,9 @@ export const BookingItems = styled(Box)`
   right: 0;
   width: 30%;
   box-shadow: 0 0 5px #ccc;
+  @media screen and (max-width: 992px) {
+    position: absolute;
+  }
 `;
 
 export const BookingItem = styled(Box)`

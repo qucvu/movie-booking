@@ -29,7 +29,6 @@ const ChairList = (props: Props) => {
   //   return <ErrorAPI />;
   // }
 
-  console.log(ticketRoom);
   return (
     <Box>
       <Grid container sx={{ mt: "5rem" }}>
