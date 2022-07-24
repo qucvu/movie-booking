@@ -13,6 +13,36 @@ export interface UserRegister {
   matKhau: string;
   email: string;
   soDt: string;
-  maNhom: string;
+  maNhom?: string;
   hoTen: string;
+  maloaiNguoiDung?: string;
+}
+
+export interface InfoUser {
+  email: string;
+  hoTen: string;
+  loaiNguoiDung: { maLoaiNguoiDung: string; tenLoai: string };
+  maLoaiNguoiDung: string;
+  maNhom: string;
+  matKhau: string;
+  soDT: string;
+  taiKhoan: string;
+  thongTinDatVe: {
+    danhSachGhe: {
+      maCumRap: string;
+      maGhe: number;
+      maHeThongRap: string;
+      maRap: number;
+      tenCumRap: string;
+      tenGhe: string;
+      tenHeThongRap: string;
+      tenRap: string;
+    }[];
+    giaVe: number;
+    hinhAnh: string;
+    maVe: number;
+    ngayDat: string;
+    tenPhim: string;
+    thoiLuongPhim: number;
+  }[];
 }

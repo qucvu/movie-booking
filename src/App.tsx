@@ -17,6 +17,7 @@ const BookingPage = lazy(() => import("Pages/Booking/BookingPage"));
 const Login = lazy(() => import("Pages/Login/Login"));
 const Register = lazy(() => import("Pages/Register/Register"));
 const Checkout = lazy(() => import("Pages/Checkout/Checkout"));
+const UserInfoPage = lazy(() => import("Pages/UserInfo/UserInfoPage"));
 function App() {
   return (
     <ErrorBoundary>
@@ -27,12 +28,12 @@ function App() {
               <Route path="" element={<HomeTemplate />}>
                 <Route index element={<HomePage />} />
                 <Route path="details/:cinemaId" element={<CinemaDetails />} />
-                <Route path="detail" element={<DetailPage />}>
-                  <Route path=":movieName/:movieId" element={<DetailPage />} />
-                </Route>
-                <Route path="booking" element={<BookingPage />}>
-                  <Route path=":scheduleId" element={<BookingPage />} />
-                </Route>
+                <Route
+                  path="detail/:movieName/:movieId"
+                  element={<DetailPage />}
+                />
+                <Route path="booking/:scheduleId" element={<BookingPage />} />
+                <Route path="user" element={<UserInfoPage />} />
               </Route>
               <Route path="form" element={<FormTemplate />}>
                 <Route path="sign-in" element={<Login />} />
@@ -46,6 +47,7 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+
               <Route path="*" element={<Navigate to={"/"} />}></Route>
             </Routes>
           </ThemeProvider>

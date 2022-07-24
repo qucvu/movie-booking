@@ -19,7 +19,7 @@ const ChairItem = ({ chair }: Props) => {
       dispatch(addChair(chair));
     } else dispatch(removeChair(chair));
     return () => {};
-  }, [choose, dispatch, chair]);
+  }, [choose, dispatch, chair, chair.daDat]);
   console.log("render");
 
   const renderIcon = (color: string, disabled: boolean = false) => {

@@ -1,19 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Chair, TicketRoom } from "Interfaces/bookingInterfaces";
+import { Chair, ListTicket, TicketRoom } from "Interfaces/bookingInterfaces";
 import bookingAPI from "Services/bookingAPI";
 
 interface State {
   ticketRoom: TicketRoom | null;
   isTicketRoomLoading: boolean;
   ticketRoomError: string | null;
-  chairList: Chair[];
+  chairList: Chair[] | null;
   total: number;
 }
 const initialState: State = {
   ticketRoom: null,
   isTicketRoomLoading: false,
   ticketRoomError: null,
-  chairList: [],
+  chairList: null,
   total: 0,
 };
 
@@ -31,9 +31,9 @@ export const getTicketRoom = createAsyncThunk(
 
 export const handleBookTickets = createAsyncThunk(
   `booking/handleBookTickets`,
-  async (payload?) => {
+  async (payload: ListTicket) => {
     try {
-      const data = await bookingAPI.handleBookTickets();
+      const data = await bookingAPI.handleBookTickets(payload);
       return data;
     } catch (error) {
       throw error;
@@ -45,18 +45,27 @@ const bookingSlice = createSlice({
   initialState,
   reducers: {
     addChair: (state, { payload }) => {
-      state.chairList.push(payload);
-      state.total = state.chairList.reduce((total, chair) => {
+      if (state.chairList === null) {
+        state.chairList = [payload];
+      } else {
+        state.chairList?.push(payload);
+      }
+      state.total = state.chairList?.reduce((total, chair) => {
         return (total += chair.giaVe);
       }, 0);
     },
     removeChair: (state, { payload }) => {
-      state.chairList = state.chairList.filter(
-        (chair) => chair.tenGhe !== payload.tenGhe
-      );
-      state.total = state.chairList.reduce((total, chair) => {
-        return (total += chair.giaVe);
-      }, 0);
+      if (state.chairList) {
+        state.chairList = state.chairList?.filter(
+          (chair) => chair.tenGhe !== payload.tenGhe
+        );
+        state.total = state.chairList?.reduce((total, chair) => {
+          return (total += chair.giaVe);
+        }, 0);
+        if (state.chairList?.length === 0) {
+          state.chairList = null;
+        }
+      }
     },
   },
   extraReducers: (builder) => {
@@ -73,7 +82,11 @@ const bookingSlice = createSlice({
     });
 
     //----------------------------------------
-    builder.addCase(handleBookTickets.fulfilled, () => {});
+    builder.addCase(handleBookTickets.fulfilled, (state) => {
+      state.chairList = [];
+      state.total = 0;
+    });
+    builder.addCase(handleBookTickets.rejected, (state, { error }) => {});
   },
 });
 export const { addChair, removeChair } = bookingSlice.actions;

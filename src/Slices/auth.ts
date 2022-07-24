@@ -1,5 +1,5 @@
+import { InfoUser } from "./../Interfaces/User";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { AxiosError } from "axios";
 import { LoginValues } from "Interfaces/Login";
 import { RegisterValues } from "Interfaces/Register";
 
@@ -12,6 +12,9 @@ interface State {
   isLoading: boolean;
   errorLogin: string | null;
   errorRegister: string | null;
+  infoUser: InfoUser | null;
+  isInfoUserLoading: boolean;
+  errorInfoUser: string | null;
 }
 const initialState: State = {
   user: JSON.parse(localStorage.getItem("user") as string) || null,
@@ -19,6 +22,9 @@ const initialState: State = {
   errorLogin: null,
   errorRegister: null,
   registerValues: null,
+  infoUser: null,
+  isInfoUserLoading: false,
+  errorInfoUser: null,
 };
 
 export const loginUser = createAsyncThunk(
@@ -42,6 +48,27 @@ export const registerUser = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue(error);
+    }
+  }
+);
+
+export const postUserInfo = createAsyncThunk(`auth/userInfo`, async () => {
+  try {
+    const data = await UserAPI.postUserInfo();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+});
+
+export const putUpdateUser = createAsyncThunk(
+  `auth/update`,
+  async (payload: UserRegister) => {
+    try {
+      const data = await UserAPI.putUpdateUser(payload);
+      return data;
+    } catch (error) {
+      throw error;
     }
   }
 );
@@ -85,7 +112,18 @@ const authSlice = createSlice({
         state.errorRegister = payload;
       }
     });
+    //--------------------------------------------------------------
+    builder.addCase(postUserInfo.pending, (state) => {
+      state.isInfoUserLoading = true;
+    });
+    builder.addCase(postUserInfo.fulfilled, (state, { payload }) => {
+      state.isInfoUserLoading = false;
+      state.infoUser = payload;
+    });
+    builder.addCase(postUserInfo.rejected, (state, { payload }) => {});
   },
 });
+
+export const { logoutUser } = authSlice.actions;
 
 export default authSlice.reducer;

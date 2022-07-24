@@ -24,3 +24,13 @@ export interface TicketRoom {
   thongTinPhim: MovieInfo;
   danhSachGhe: Chair[];
 }
+
+export interface ListTicket {
+  maLichChieu: number | undefined;
+  danhSachVe:
+    | {
+        maGhe: number;
+        giaVe: number;
+      }[]
+    | undefined;
+}

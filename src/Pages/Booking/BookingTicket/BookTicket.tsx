@@ -1,9 +1,12 @@
-import { Divider, Button, Modal, Box, Typography, Stack } from "@mui/material";
+import { Divider, Button } from "@mui/material";
 import SweetAlertConfirm from "Components/SweetAlert/SweetAlertConfirm";
-import { RootState } from "configStore";
+import SweetAlertSuccess from "Components/SweetAlert/SweetAlertSuccess";
+import { AppDispatch, RootState } from "configStore";
+import { ListTicket } from "Interfaces/bookingInterfaces";
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { handleBookTickets } from "Slices/bookingSlice";
 import {
   BookingItem,
   BookingItems,
@@ -15,12 +18,34 @@ type Props = {};
 
 const BookTicket = (props: Props) => {
   const [open, setOpen] = useState(false);
+  const [openSuccess, setOpenSuccess] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
 
   const { ticketRoom, chairList, total } = useSelector(
     (state: RootState) => state.bookingSlice
   );
+  const { user } = useSelector((state: RootState) => state.auth);
+
+  const danhSachVe = chairList?.map((chair) => ({
+    maGhe: chair.maGhe,
+    giaVe: chair.giaVe,
+  }));
+  const DanhSachVe: ListTicket = {
+    maLichChieu: ticketRoom?.thongTinPhim.maLichChieu,
+    danhSachVe: danhSachVe,
+  };
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleBookTicket = () => {
+    dispatch(handleBookTickets(DanhSachVe));
+    setOpenSuccess(true);
+    handleClose();
+  };
+  console.log(chairList);
+
   return (
     <div>
       <BookingItems component="nav">
@@ -55,13 +80,15 @@ const BookTicket = (props: Props) => {
         <BookingItem sx={{ display: "flex", justifyContent: "space-between" }}>
           <BookingTitle>Ghế đã chọn:</BookingTitle>
           <BookingText>
-            {chairList.map((chair) => chair.tenGhe + " ")}
+            {chairList?.map((chair) => chair.tenGhe + " ")}
           </BookingText>
         </BookingItem>
+        <Divider />
         <BookingItem sx={{ display: "flex", justifyContent: "space-between" }}>
           <BookingTitle>Tổng tiền:</BookingTitle>
           <BookingText>{total}</BookingText>
         </BookingItem>
+        <Divider />
         <BookingItem sx={{ display: "flex", justifyContent: "center" }}>
           <Button
             sx={{
@@ -81,68 +108,38 @@ const BookTicket = (props: Props) => {
         </BookingItem>
       </BookingItems>
 
-      {/* <Modal open={open} onClose={handleClose}>
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 400,
-            bgcolor: "background.paper",
-
-            boxShadow: 24,
-            p: 4,
+      {!user ? (
+        <SweetAlertConfirm
+          show={open}
+          icon="error"
+          title="Bạn chưa đăng nhập!"
+          text="Bạn có muốn đăng nhập không?"
+          callbackConfirm={() => navigate("/checkout")}
+          callbackClose={handleClose}
+        />
+      ) : !chairList ? (
+        <SweetAlertConfirm
+          show={open}
+          icon="error"
+          title="Vui lòng chọn ghế trước khi đặt vé!"
+          showCancelButton={false}
+          callbackConfirm={handleClose}
+          callbackClose={handleClose}
+        />
+      ) : (
+        <SweetAlertConfirm
+          show={open}
+          title="Bạn có muốn đặt vé?"
+          callbackConfirm={() => {
+            handleBookTicket();
           }}
-        >
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Bạn chưa đăng nhập
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ my: 2 }}>
-            Bạn có muốn đăng nhập không?
-          </Typography>
-          <Stack direction="row">
-            <Button
-              variant="contained"
-              color="info"
-              sx={{
-                py: 1,
-                px: 2,
-                mx: 1,
-              }}
-            >
-              <NavLink to={"/form/sign-in"}>
-                <Typography
-                  sx={{
-                    color: "primary.contrastText",
-                  }}
-                >
-                  Đồng ý
-                </Typography>
-              </NavLink>
-            </Button>
-            <Button
-              variant="contained"
-              color="error"
-              sx={{
-                py: 1,
-                px: 2,
-                mx: 1,
-              }}
-              onClick={() => handleClose()}
-            >
-              Không
-            </Button>
-          </Stack>
-        </Box> */}
-      {/* </Modal> */}
-      <SweetAlertConfirm
-        show={open}
-        icon="error"
-        title="Bạn chưa đăng nhập"
-        text="Bạn có muốn đăng nhập không?"
-        callbackConfirm={() => alert(123)}
-        callbackClose={() => setOpen(false)}
+          callbackClose={handleClose}
+        />
+      )}
+      <SweetAlertSuccess
+        show={openSuccess}
+        title="Đặt vé thành công!"
+        navigateDestination={"-1"}
       />
     </div>
   );
