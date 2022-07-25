@@ -3,7 +3,7 @@ import SweetAlert2 from "react-sweetalert2";
 
 type Props = {
   show: boolean;
-  title?: string;
+  title?: string | null;
   text?: string;
 };
 

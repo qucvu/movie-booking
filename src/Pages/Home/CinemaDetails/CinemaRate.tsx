@@ -139,7 +139,7 @@ const CinemaRate = ({ selectedCinemaAddress }: Props) => {
             selectedCinemaAddress.maCumRap
           )
             return (
-              <UserCommemtEx>
+              <UserCommemtEx key={item.comment}>
                 <Box
                   display="flex"
                   justifyContent="space-between"

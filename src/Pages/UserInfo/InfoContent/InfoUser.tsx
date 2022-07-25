@@ -11,6 +11,7 @@ import { putUpdateUser } from "Slices/auth";
 import SweetAlertConfirm from "Components/SweetAlert/SweetAlertConfirm";
 import SweetAlertSuccess from "Components/SweetAlert/SweetAlertSuccess";
 import Swal from "sweetalert2";
+import SweetAlertError from "Components/SweetAlert/SweetAlertError";
 type Props = {};
 
 const InfoUser = (props: Props) => {
@@ -20,7 +21,9 @@ const InfoUser = (props: Props) => {
   const [readOnly, setReadOnly] = useState(true);
   const classes = useStyles();
   const dispatch = useDispatch<AppDispatch>();
-  const { infoUser } = useSelector((state: RootState) => state.auth);
+  const { infoUser, errorUpdateUser } = useSelector(
+    (state: RootState) => state.auth
+  );
 
   const {
     register,
@@ -42,7 +45,6 @@ const InfoUser = (props: Props) => {
   const onSubmit = (values: RegisterValues) => {
     // setOpen(true);
     delete values["passwordConfirm"];
-
     Swal.fire({
       title: "Bạn muốn thay đổi thông tin?",
       icon: "warning",
@@ -51,19 +53,23 @@ const InfoUser = (props: Props) => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Đồng ý",
       cancelButtonText: "Hủy bỏ",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(
-          putUpdateUser({
-            ...values,
-            maLoaiNguoiDung: infoUser?.maLoaiNguoiDung,
-          })
-        );
-        setOpenSuccess(true);
-        setOpenUpdate(false);
-        setReadOnly(true);
-      }
-    });
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          dispatch(
+            putUpdateUser({
+              ...values,
+              maLoaiNguoiDung: infoUser?.maLoaiNguoiDung,
+            })
+          );
+          setOpenSuccess(true);
+          setOpenUpdate(false);
+          setReadOnly(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   const onError = () => {};
 
