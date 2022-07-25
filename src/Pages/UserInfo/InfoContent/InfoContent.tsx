@@ -28,7 +28,7 @@ const InfoContent = (props: Props) => {
   }
 
   return (
-    <Container sx={{ mt: "5rem", py: 5, bgcolor: "paper.main" }}>
+    <Container sx={{ mt: "5rem", py: 5 }}>
       <Typography
         py={3}
         variant="h4"

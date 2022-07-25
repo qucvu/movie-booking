@@ -247,7 +247,7 @@ const Header = (props: Props) => {
       <SweetAlertSuccess
         show={openSuccess}
         title="Đăng xuất thành công!"
-        navigateDestination={"-1"}
+        navigateDestination={"/"}
       />
     </AppBar>
   );

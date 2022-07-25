@@ -4,7 +4,7 @@ import SweetAlert2 from "react-sweetalert2";
 
 type Props = {
   show: boolean;
-  navigateDestination: string;
+  navigateDestination: any;
   title?: string;
   text?: string;
 };

@@ -114,7 +114,7 @@ const BookTicket = (props: Props) => {
           icon="error"
           title="Bạn chưa đăng nhập!"
           text="Bạn có muốn đăng nhập không?"
-          callbackConfirm={() => navigate("/checkout")}
+          callbackConfirm={() => navigate("/form/sign-in")}
           callbackClose={handleClose}
         />
       ) : !chairList ? (
@@ -139,7 +139,8 @@ const BookTicket = (props: Props) => {
       <SweetAlertSuccess
         show={openSuccess}
         title="Đặt vé thành công!"
-        navigateDestination={"-1"}
+        text="Vui lòng kiểm tra trong lịch sử đặt vé "
+        navigateDestination={"/checkout"}
       />
     </div>
   );

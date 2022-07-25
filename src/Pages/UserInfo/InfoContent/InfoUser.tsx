@@ -67,13 +67,13 @@ const InfoUser = (props: Props) => {
           fullWidth
           id="fullName"
           label="Họ tên"
-          color={errors.hoTen && "warning"}
+          color={errors.hoTen && !readOnly ? "warning" : "primary"}
           {...register("hoTen")}
           InputProps={{
             readOnly: readOnly,
           }}
         />
-        {errors.hoTen && (
+        {!readOnly && errors.hoTen && (
           <Typography className={classes.warning}>
             {errors.hoTen.message}
           </Typography>
@@ -87,13 +87,13 @@ const InfoUser = (props: Props) => {
           id="email"
           label="Email"
           type="email"
-          color={errors.email && "warning"}
+          color={errors.email && !readOnly ? "warning" : "primary"}
           {...register("email")}
           InputProps={{
             readOnly: readOnly,
           }}
         />
-        {errors.email && (
+        {!readOnly && errors.email && (
           <Typography className={classes.warning}>
             {errors.email.message}
           </Typography>
@@ -106,13 +106,13 @@ const InfoUser = (props: Props) => {
           fullWidth
           id="phone"
           label="Số điện thoại"
-          color={errors.soDt && "warning"}
+          color={errors.soDt && !readOnly ? "warning" : "primary"}
           {...register("soDt")}
           InputProps={{
             readOnly: readOnly,
           }}
         />
-        {errors.soDt && (
+        {!readOnly && errors.soDt && (
           <Typography className={classes.warning}>
             {errors.soDt.message}
           </Typography>
@@ -126,13 +126,13 @@ const InfoUser = (props: Props) => {
           label="Mật khẩu"
           type="password"
           id="password"
-          color={errors.matKhau && "warning"}
+          color={errors.matKhau && !readOnly ? "warning" : "primary"}
           {...register("matKhau")}
           InputProps={{
             readOnly: readOnly,
           }}
         />
-        {errors.matKhau && (
+        {!readOnly && errors.matKhau && (
           <Typography className={classes.warning}>
             {errors.matKhau.message}
           </Typography>
@@ -153,7 +153,7 @@ const InfoUser = (props: Props) => {
         ) : (
           <></>
         )}
-        {openUpdate && errors.passwordConfirm && (
+        {!readOnly && openUpdate && errors.passwordConfirm && (
           <Typography className={classes.warning}>
             {errors.passwordConfirm.message}
           </Typography>

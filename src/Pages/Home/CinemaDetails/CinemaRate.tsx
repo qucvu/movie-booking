@@ -70,12 +70,12 @@ const CinemaRate = (props: Props) => {
           >
             <Box display="flex" gap="0.5rem">
               <Avatar src="https://i.pravatar.cc/150?u=Biden" alt="Avatar" />
-              <Typography sx={{ fontWeight: "700" }}>
+              <Box sx={{ fontWeight: "700" }}>
                 Biden
                 <Typography sx={{ fontSize: "0.8rem", opacity: "0.6" }}>
                   24/03 10:10 AM
                 </Typography>
-              </Typography>
+              </Box>
             </Box>
             <Box sx={{ fontSize: "0.3rem" }}>
               <WrappedRate>

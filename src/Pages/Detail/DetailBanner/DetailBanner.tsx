@@ -78,6 +78,7 @@ const DetailBanner = (props: Props) => {
                 component="img"
                 image={movie?.hinhAnh}
                 alt={movie?.hinhAnh}
+                sx={{ borderRadius: "0.5rem" }}
               />
               <CardOverlay>
                 <CardActions>
@@ -112,10 +113,11 @@ const DetailBanner = (props: Props) => {
             display: "flex",
             justifyContent: "center",
             flexDirection: "column",
+            fontWeight: "500",
           }}
-          color="primary.contrastText"
+          color="secondary.contrastText"
         >
-          <Typography variant="h5" color="secondary.light">
+          <Typography variant="h5" color="secondary.dark">
             {movie?.tenPhim}
           </Typography>
           {movie?.danhGia ? (
@@ -124,6 +126,7 @@ const DetailBanner = (props: Props) => {
               precision={0.5}
               value={movie?.danhGia / 2}
               readOnly
+              sx={{ color: "secondary.dark" }}
             />
           ) : (
             <></>

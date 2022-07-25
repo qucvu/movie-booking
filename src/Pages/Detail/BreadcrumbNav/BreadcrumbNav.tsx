@@ -23,7 +23,7 @@ const BreadcrumbNav = (props: Props) => {
   }, [movie]);
   return (
     <Container sx={{ pt: 5, mt: "5rem" }} role="presentation">
-      <Breadcrumbs sx={{ mx: 5 }} color="primary.contrastText">
+      <Breadcrumbs sx={{ mx: 5 }} color="secondary.contrastText">
         <NavLink to={"/"}>
           <BreadcrumbText>
             <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
@@ -38,7 +38,7 @@ const BreadcrumbNav = (props: Props) => {
         </NavLink>
         <Typography
           sx={{ display: "flex", alignItems: "center" }}
-          color="secondary.light"
+          color="secondary.dark"
         >
           <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />
           {movie?.tenPhim}

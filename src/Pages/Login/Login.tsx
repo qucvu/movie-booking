@@ -134,7 +134,7 @@ const Login = (): JSX.Element => {
   }, []);
   return (
     <Container component="main" maxWidth="sm">
-      <SweetAlertSuccess show={modalOpen} navigateDestination={"-1"} />;
+      <SweetAlertSuccess show={modalOpen} navigateDestination={-1} />;
       <div className={classes.paper}>
         <Avatar className={classes.avatar}></Avatar>
         <Typography component="h1" variant="h5" fontWeight="bold">
