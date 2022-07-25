@@ -44,7 +44,6 @@ const BookTicket = (props: Props) => {
     setOpenSuccess(true);
     handleClose();
   };
-  console.log(chairList);
 
   return (
     <div>

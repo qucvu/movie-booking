@@ -8,17 +8,20 @@ import { schemaRegister } from "Pages/Register/schemaRegister";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useStyles } from "Pages/Login/Login";
 import { putUpdateUser } from "Slices/auth";
-
+import SweetAlertConfirm from "Components/SweetAlert/SweetAlertConfirm";
+import SweetAlertSuccess from "Components/SweetAlert/SweetAlertSuccess";
+import Swal from "sweetalert2";
 type Props = {};
 
 const InfoUser = (props: Props) => {
+  const [open, setOpen] = useState(false);
+  const [openSuccess, setOpenSuccess] = useState(false);
   const [openUpdate, setOpenUpdate] = useState(false);
   const [readOnly, setReadOnly] = useState(true);
   const classes = useStyles();
   const dispatch = useDispatch<AppDispatch>();
   const { infoUser } = useSelector((state: RootState) => state.auth);
 
-  console.log(infoUser);
   const {
     register,
     handleSubmit,
@@ -37,17 +40,36 @@ const InfoUser = (props: Props) => {
   });
 
   const onSubmit = (values: RegisterValues) => {
+    // setOpen(true);
     delete values["passwordConfirm"];
-    dispatch(putUpdateUser(values));
-    setOpenUpdate(false);
-    setReadOnly(true);
-  };
 
+    Swal.fire({
+      title: "Bạn muốn thay đổi thông tin?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Đồng ý",
+      cancelButtonText: "Hủy bỏ",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(
+          putUpdateUser({
+            ...values,
+            maLoaiNguoiDung: infoUser?.maLoaiNguoiDung,
+          })
+        );
+        setOpenSuccess(true);
+        setOpenUpdate(false);
+        setReadOnly(true);
+      }
+    });
+  };
   const onError = () => {};
 
   return (
     <Box>
-      <Box component="form">
+      <Box component="form" onSubmit={handleSubmit(onSubmit, onError)}>
         <TextField
           variant="outlined"
           margin="dense"
@@ -165,39 +187,59 @@ const InfoUser = (props: Props) => {
               variant="contained"
               color="success"
               type="submit"
-              onClick={handleSubmit(onSubmit, onError)}
               sx={{ mr: 2 }}
             >
               Lưu
             </Button>
-            <Button
-              component="a"
-              variant="contained"
-              type="button"
+            <Box
+              sx={{
+                bgcolor: "primary.main",
+                p: 2,
+                borderRadius: "4px",
+                cursor: "pointer",
+                color: "primary.contrastText",
+              }}
               onClick={() => {
                 setOpenUpdate(false);
                 setReadOnly(true);
               }}
             >
               Hủy
-            </Button>
+            </Box>
           </Stack>
         ) : (
           <Stack mt={2} direction="row" justifyContent="flex-end">
-            <Button
-              variant="contained"
-              type="button"
-              color="info"
+            <Box
+              bgcolor="info"
+              sx={{
+                bgcolor: "info.main",
+                p: 2,
+                borderRadius: "8px",
+                cursor: "pointer",
+                color: "primary.contrastText",
+              }}
               onClick={() => {
                 setOpenUpdate(true);
                 setReadOnly(false);
               }}
             >
               Thay đổi thông tin
-            </Button>
+            </Box>
           </Stack>
         )}
       </Box>
+
+      {/* <SweetAlertConfirm
+        show={open}
+        title="Bạn muốn thay đổi thông tin?"
+        callbackConfirm={}
+        callbackClose={handleClose}
+      /> */}
+      <SweetAlertSuccess
+        show={openSuccess}
+        title="Thay đổi thông tin thành công!"
+        navigateDestination={"-1"}
+      />
     </Box>
   );
 };
