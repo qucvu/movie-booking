@@ -213,7 +213,7 @@ const CinemaDetails = (props: Props) => {
                 <CinemaInfo selectedCinemaAddress={selectedCinemaAddress} />
               </TabPanel>
               <TabPanel value={value} index={2}>
-                <CinemaRate />
+                <CinemaRate selectedCinemaAddress={selectedCinemaAddress} />
               </TabPanel>
             </WrappedTabItem>
           </Box>
