@@ -15,7 +15,6 @@ interface State {
   infoUser: InfoUser | null;
   isInfoUserLoading: boolean;
   errorInfoUser: string | null;
-  errorUpdateUser: string | null;
 }
 const initialState: State = {
   user: JSON.parse(localStorage.getItem("user") as string) || null,
@@ -26,7 +25,6 @@ const initialState: State = {
   infoUser: null,
   isInfoUserLoading: false,
   errorInfoUser: null,
-  errorUpdateUser: null,
 };
 
 export const loginUser = createAsyncThunk(
@@ -123,10 +121,6 @@ const authSlice = createSlice({
       state.infoUser = payload;
     });
     builder.addCase(postUserInfo.rejected, (state, { payload }) => {});
-
-    builder.addCase(putUpdateUser.rejected, (state, { payload }) => {
-      if (typeof payload === "string") state.errorUpdateUser = payload;
-    });
   },
 });
 

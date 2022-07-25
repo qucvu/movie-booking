@@ -121,7 +121,7 @@ const Login = (): JSX.Element => {
       await dispatch(loginUser(values)).unwrap();
       setModalOpen(true);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

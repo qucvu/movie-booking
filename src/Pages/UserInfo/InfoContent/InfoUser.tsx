@@ -21,9 +21,7 @@ const InfoUser = (props: Props) => {
   const [readOnly, setReadOnly] = useState(true);
   const classes = useStyles();
   const dispatch = useDispatch<AppDispatch>();
-  const { infoUser, errorUpdateUser } = useSelector(
-    (state: RootState) => state.auth
-  );
+  const { infoUser } = useSelector((state: RootState) => state.auth);
 
   const {
     register,
