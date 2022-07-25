@@ -15,7 +15,7 @@ export interface UserRegister {
   soDt: string;
   maNhom?: string;
   hoTen: string;
-  maloaiNguoiDung?: string;
+  maLoaiNguoiDung?: string;
 }
 
 export interface InfoUser {

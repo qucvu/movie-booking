@@ -15,17 +15,10 @@ const UserAPI = {
   postUserInfo: () => {
     return axiosClient.post(`QuanLyNguoiDung/ThongTinTaiKhoan`);
   },
-  putUpdateUser: (
-    payload: UserRegister,
-    maNhom: string = "GP01",
-    maLoaiNguoiDung: string = "KhachHang"
-  ) => {
+  putUpdateUser: (payload: UserRegister, maNhom: string = "GP01") => {
     return axiosClient.put(`QuanLyNguoiDung/CapNhatThongTinNguoiDung`, {
-      params: {
-        ...payload,
-        maNhom: maNhom,
-        maloaiNguoiDung: maLoaiNguoiDung,
-      },
+      ...payload,
+      maNhom: maNhom,
     });
   },
 };

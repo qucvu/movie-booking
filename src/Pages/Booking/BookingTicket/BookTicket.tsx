@@ -44,7 +44,6 @@ const BookTicket = (props: Props) => {
     setOpenSuccess(true);
     handleClose();
   };
-  console.log(chairList);
 
   return (
     <div>
@@ -114,7 +113,7 @@ const BookTicket = (props: Props) => {
           icon="error"
           title="Bạn chưa đăng nhập!"
           text="Bạn có muốn đăng nhập không?"
-          callbackConfirm={() => navigate("/checkout")}
+          callbackConfirm={() => navigate("/form/sign-in")}
           callbackClose={handleClose}
         />
       ) : !chairList ? (
