@@ -17,7 +17,7 @@ import {
   handleMouseDownPassword,
 } from "Pages/Login/Login";
 import LockIcon from "@mui/icons-material/Lock";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink, useLocation } from "react-router-dom";
 import { RegisterValues } from "Interfaces/Register";
 import { FieldErrors, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
@@ -30,6 +30,7 @@ import { AppDispatch, RootState } from "configStore";
 import { registerUser } from "Slices/auth";
 import SweetAlertSuccess from "Components/SweetAlert/SweetAlertSuccess";
 import SweetAlertError from "Components/SweetAlert/SweetAlertError";
+import SweetAlert2 from "react-sweetalert2";
 
 type Props = {};
 
@@ -39,6 +40,18 @@ const Register = (props: Props) => {
   const [showPassWordConfirm, setShowPassWordConfirm] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalErrorOpen, setModalErrorOpen] = useState(false);
+  const [swalProps, setSwalProps] = useState({});
+  const [navigate, setNavigate] = useState(false);
+  useEffect(() => {
+    setSwalProps({
+      show: modalOpen,
+      position: "center",
+      icon: "success",
+      title: "Đăng ký thành công",
+      showConfirmButton: true,
+      timer: 2500,
+    });
+  }, [modalOpen]);
 
   const dispatch = useDispatch<AppDispatch>();
   const { errorRegister, isLoading } = useSelector(
@@ -76,18 +89,18 @@ const Register = (props: Props) => {
   const onError = (error: FieldErrors<RegisterValues>) => {
     console.log(error);
   };
-
   useEffect(() => {
     document.title = "Đăng kí";
   }, []);
+  const prevRoute = useLocation();
+
+  if (navigate) {
+    return <Navigate to={"/form/sign-in"} state={{ prevRoute }} replace />;
+  }
   return (
     <Container component="main" maxWidth="sm">
-      <SweetAlertSuccess
-        show={modalOpen}
-        navigateDestination={"/form/sign-in"}
-        title="Đăng ký thành công"
-        text="Đăng nhập ngay!"
-      />
+      <SweetAlert2 {...swalProps} didClose={() => setNavigate(true)} />
+
       <Box
         className={classes.paper}
         sx={{ marginTop: { xs: "2rem", md: "0" } }}
@@ -251,7 +264,11 @@ const Register = (props: Props) => {
           </Button>
 
           <Box textAlign="right">
-            <NavLink to={"/form/sign-in"} className={classes.navLink}>
+            <NavLink
+              to={"/form/sign-in"}
+              state={{ prevRoute }}
+              className={classes.navLink}
+            >
               {"Bạn đã có tài khoản? Đăng nhập"}
             </NavLink>
           </Box>
