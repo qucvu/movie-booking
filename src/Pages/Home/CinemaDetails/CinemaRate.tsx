@@ -160,7 +160,7 @@ const CinemaRate = ({ selectedCinemaAddress }: Props) => {
                   <Box sx={{ fontSize: "0.3rem" }}>
                     {Array.from(Array(item.rate), (e, i) => {
                       return (
-                        <WrappedRate>
+                        <WrappedRate key={i}>
                           <StarIcon />
                         </WrappedRate>
                       );

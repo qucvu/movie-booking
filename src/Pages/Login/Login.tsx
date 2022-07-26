@@ -24,10 +24,9 @@ import { LoginValues } from "Interfaces/Login";
 import { FieldErrors, useForm } from "react-hook-form";
 import { schemaLogin } from "./schemaLogin";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { loginUser } from "Slices/auth";
+import { loginUser, toggleAvailableUser } from "Slices/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "configStore";
-import SweetAlertSuccess from "Components/SweetAlert/SweetAlertSuccess";
 import { makeStyles } from "@mui/styles";
 import SweetAlert2 from "react-sweetalert2";
 
@@ -108,7 +107,7 @@ const Login = (): JSX.Element => {
   const [modalOpen, setModalOpen] = useState(false);
   const [swalProps, setSwalProps] = useState({});
 
-  const { errorLogin, isLoading, user } = useSelector(
+  const { errorLogin, isLoading, user, availableUser } = useSelector(
     (state: RootState) => state.auth
   );
   const [showPassword, setShowPassword] = useState(false);
@@ -142,13 +141,14 @@ const Login = (): JSX.Element => {
   const navigateDestination = () => {
     if (location.state) {
       const { prevRoute } = location.state as LocationState;
-      console.log(prevRoute.pathname);
       if (prevRoute.pathname === "/form/sign-up") {
         navigate("/");
+        dispatch(toggleAvailableUser());
         return;
       }
     }
     navigate(-1);
+    dispatch(toggleAvailableUser());
   };
   useEffect(() => {
     setSwalProps({
@@ -163,9 +163,12 @@ const Login = (): JSX.Element => {
 
   useEffect(() => {
     document.title = "Đăng nhập";
+    // setAvailableUser(false);
+    dispatch(toggleAvailableUser());
   }, []);
 
-  if (user) {
+  if (user && availableUser) {
+    console.log(123);
     return <Navigate to={"/"} />;
   }
   return (
