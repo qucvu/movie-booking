@@ -16,7 +16,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 // import { makeStyles } from "@mui/styles";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Navigate, NavLink, useLocation, useNavigate } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -24,7 +24,7 @@ import { LoginValues } from "Interfaces/Login";
 import { FieldErrors, useForm } from "react-hook-form";
 import { schemaLogin } from "./schemaLogin";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { loginUser, toggleAvailableUser } from "Slices/auth";
+import { loginUser, setAvailableUser, setUnavailableUser } from "Slices/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "configStore";
 import { makeStyles } from "@mui/styles";
@@ -143,12 +143,12 @@ const Login = (): JSX.Element => {
       const { prevRoute } = location.state as LocationState;
       if (prevRoute.pathname === "/form/sign-up") {
         navigate("/");
-        dispatch(toggleAvailableUser());
+        dispatch(setAvailableUser());
         return;
       }
     }
     navigate(-1);
-    dispatch(toggleAvailableUser());
+    dispatch(setAvailableUser());
   };
   useEffect(() => {
     setSwalProps({
@@ -164,11 +164,9 @@ const Login = (): JSX.Element => {
   useEffect(() => {
     document.title = "Đăng nhập";
     // setAvailableUser(false);
-    dispatch(toggleAvailableUser());
   }, []);
 
   if (user && availableUser) {
-    console.log(123);
     return <Navigate to={"/"} />;
   }
   return (

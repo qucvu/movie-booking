@@ -26,7 +26,7 @@ const initialState: State = {
   infoUser: null,
   isInfoUserLoading: false,
   errorInfoUser: null,
-  availableUser: false,
+  availableUser: JSON.parse(localStorage.getItem("availableUser") as string),
 };
 
 export const loginUser = createAsyncThunk(
@@ -82,10 +82,16 @@ const authSlice = createSlice({
     logoutUser: (state) => {
       state.user = null;
       localStorage.setItem("user", JSON.stringify(null));
+      state.availableUser = false;
+      localStorage.setItem("availableUser", JSON.stringify(false));
     },
-
-    toggleAvailableUser: (state) => {
-      state.availableUser = !state.availableUser;
+    setUnavailableUser: (state) => {
+      state.availableUser = false;
+      localStorage.setItem("availableUser", JSON.stringify(false));
+    },
+    setAvailableUser: (state) => {
+      state.availableUser = true;
+      localStorage.setItem("availableUser", JSON.stringify(true));
     },
   },
   extraReducers: (builder) => {
@@ -130,6 +136,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { logoutUser, toggleAvailableUser } = authSlice.actions;
+export const { logoutUser, setUnavailableUser, setAvailableUser } =
+  authSlice.actions;
 
 export default authSlice.reducer;

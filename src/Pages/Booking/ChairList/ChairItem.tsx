@@ -37,7 +37,14 @@ const ChairItem = ({ chair }: Props) => {
   };
 
   return (
-    <Grid item xs={1} sx={{ position: "relative", textAlign: "center" }}>
+    <Grid
+      spacing={1}
+      item
+      xs={2}
+      sm={1.5}
+      md={1}
+      sx={{ position: "relative", textAlign: "center" }}
+    >
       {chair.daDat
         ? renderIcon("error.main", true)
         : choose
