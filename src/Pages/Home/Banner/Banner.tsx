@@ -18,9 +18,9 @@ import ErrorAPI from "Components/ErrorAPI/ErrorAPI";
 import TrailerModal from "../TrailerModal";
 
 const Banner = () => {
-  const [open, setOpen] = useState(false);
+  const [openMovie, setOpenMovie] = useState(false);
   const [openPopup, setOpenPopup] = useState(true);
-  const [movieId, setMovieId] = useState("");
+  // const [movieId, setMovieId] = useState("");
 
   const dispatch = useDispatch<AppDispatch>();
   const { banners, isBannerLoading, bannerError, movie, movieError } =
@@ -28,12 +28,12 @@ const Banner = () => {
   useEffect(() => {
     dispatch(getBannerShowing());
     return () => {};
-  }, [dispatch]);
+  }, []);
 
-  useEffect(() => {
-    if (movieId) dispatch(getMovieInfo(movieId));
-    return () => {};
-  }, [movieId, dispatch]);
+  // useEffect(() => {
+  //   if (movieId) dispatch(getMovieInfo(movieId));
+  //   return () => {};
+  // }, [movieId]);
 
   if (isBannerLoading) {
     return <LoadingAPI />;
@@ -44,10 +44,10 @@ const Banner = () => {
   // }
 
   const handleOpen = (movieId: string) => {
-    setMovieId(movieId);
-    setOpen(true);
+    dispatch(getMovieInfo(movieId));
+    setOpenMovie(true);
   };
-  const handleClose = () => setOpen(false);
+  const handleClose = () => setOpenMovie(false);
   const handleClosePopup = () => setOpenPopup(false);
 
   const randomImgBanner = () => {
@@ -115,15 +115,15 @@ const Banner = () => {
                   }}
                 />
               </ButtonPlay>
-              <Modal open={open} onClose={handleClose}>
-                <Box>
-                  <TrailerModal trailer={movie?.trailer} />
-                </Box>
-              </Modal>
             </BannerBox>
           </Box>
         ))}
       </Slider>
+      <Modal open={openMovie} onClose={handleClose}>
+        <Box>
+          <TrailerModal trailer={movie?.trailer} />
+        </Box>
+      </Modal>
       <Modal open={openPopup} onClose={handleClosePopup}>
         <Box>
           <TrailerModal image={randomImgBanner()} onClose={handleClosePopup} />
