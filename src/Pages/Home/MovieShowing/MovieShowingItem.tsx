@@ -33,7 +33,6 @@ const MovieShowingItem = ({ movie }: Props) => {
     setOpen(true);
   };
   const handleClose = () => setOpen(false);
-  console.log(movie);
 
   return (
     <Card sx={{ p: 2, boxShadow: "none", maxWidth: 345, bgcolor: "inherit" }}>
