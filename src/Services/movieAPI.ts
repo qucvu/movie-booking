@@ -12,7 +12,7 @@ const movieAPI = {
       },
     });
   },
-  getMovieShowing: (tenPhim?: string, maNhom: string = "GP01") => {
+  getMovieShowing: (tenPhim?: string, maNhom: string = "GP03") => {
     return axiosClient.get<Movie[]>(`QuanLyPhim/LayDanhSachPhim`, {
       params: {
         maNhom: maNhom,
