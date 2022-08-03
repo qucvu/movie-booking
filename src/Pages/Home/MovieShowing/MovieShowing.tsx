@@ -37,6 +37,7 @@ export default function BasicTabs() {
     setValue(newValue);
   };
 
+  console.log("movie.dangChieu");
   const settings: Settings = {
     dots: true,
     arrows: false,

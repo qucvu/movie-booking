@@ -40,7 +40,6 @@ const InfoUser = (props: Props) => {
   });
 
   const onSubmit = (values: RegisterValues) => {
-    // setOpen(true);
     delete values["passwordConfirm"];
 
     Swal.fire({
@@ -151,7 +150,7 @@ const InfoUser = (props: Props) => {
           color={errors.matKhau && "warning"}
           {...register("matKhau")}
           InputProps={{
-            readOnly: readOnly,
+            readOnly: true,
           }}
         />
         {errors.matKhau && (

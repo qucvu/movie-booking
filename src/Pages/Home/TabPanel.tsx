@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import React from "react";
+import React, { memo } from "react";
 
 type Props = {
   children?: React.ReactNode;
@@ -22,4 +22,4 @@ const TabPanel = (props: Props) => {
   );
 };
 
-export default TabPanel;
+export default memo(TabPanel);
