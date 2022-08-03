@@ -16,19 +16,19 @@ import {
   CircularProgress,
 } from "@mui/material";
 // import { makeStyles } from "@mui/styles";
-import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Navigate, NavLink, useLocation, useNavigate } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { LoginValues } from "Interfaces/Login";
 import { FieldErrors, useForm } from "react-hook-form";
 import { schemaLogin } from "./schemaLogin";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { loginUser } from "Slices/auth";
+import { loginUser, setAvailableUser, setUnavailableUser } from "Slices/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "configStore";
-import SweetAlertSuccess from "Components/SweetAlert/SweetAlertSuccess";
 import { makeStyles } from "@mui/styles";
+import SweetAlert2 from "react-sweetalert2";
 
 // const BoxLogin = styled.div`
 //   background-color: #fff;
@@ -40,6 +40,11 @@ import { makeStyles } from "@mui/styles";
 //   display: flex;
 //   flex-direction: column;
 // `;
+type LocationState = {
+  prevRoute: {
+    pathname: string;
+  };
+};
 
 export const Copyright = () => {
   return (
@@ -100,7 +105,9 @@ const Login = (): JSX.Element => {
   const classes = useStyles();
   const dispatch = useDispatch<AppDispatch>();
   const [modalOpen, setModalOpen] = useState(false);
-  const { errorLogin, isLoading } = useSelector(
+  const [swalProps, setSwalProps] = useState({});
+
+  const { errorLogin, isLoading, user, availableUser } = useSelector(
     (state: RootState) => state.auth
   );
   const [showPassword, setShowPassword] = useState(false);
@@ -121,7 +128,7 @@ const Login = (): JSX.Element => {
       await dispatch(loginUser(values)).unwrap();
       setModalOpen(true);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -129,12 +136,47 @@ const Login = (): JSX.Element => {
     console.log(error);
   };
 
+  const location = useLocation();
+  const navigate = useNavigate();
+  const navigateDestination = () => {
+    if (location.state) {
+      const { prevRoute } = location.state as LocationState;
+      if (prevRoute.pathname === "/form/sign-up") {
+        navigate("/");
+        dispatch(setAvailableUser());
+        return;
+      }
+    }
+    navigate(-1);
+    dispatch(setAvailableUser());
+  };
+  useEffect(() => {
+    setSwalProps({
+      show: modalOpen,
+      position: "center",
+      icon: "success",
+      title: "Đăng nhập thành công",
+      showConfirmButton: true,
+      timer: 2500,
+    });
+  }, [modalOpen]);
+
   useEffect(() => {
     document.title = "Đăng nhập";
+    // setAvailableUser(false);
   }, []);
+
+  if (user && availableUser) {
+    return <Navigate to={"/"} />;
+  }
   return (
     <Container component="main" maxWidth="sm">
-      <SweetAlertSuccess show={modalOpen} navigateDestination={"-1"} />;
+      {/* <SweetAlertSuccess
+        show={modalOpen}
+        navigateDestination={navigateDestination()}
+      /> */}
+      <SweetAlert2 {...swalProps} didClose={navigateDestination} />
+
       <div className={classes.paper}>
         <Avatar className={classes.avatar}></Avatar>
         <Typography component="h1" variant="h5" fontWeight="bold">

@@ -1,5 +1,5 @@
 import { Box, Button, Grid, Tab, Tabs, Typography } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { RootState, AppDispatch } from "configStore";
 import { useDispatch, useSelector } from "react-redux";
@@ -52,6 +52,15 @@ const StyledTab = styled(Tab)`
   &.Mui-selected {
     color: #fb4226;
   }
+  @media screen and (max-width: 600px) {
+    min-width: 100px;
+    font-size: 1rem;
+    margin: 0 0.5rem;
+
+    &:hover {
+      font-size: 1.1rem;
+    }
+  }
 `;
 const StyledTitle = styled("h1")`
   color: #717171;
@@ -67,6 +76,9 @@ const StyledText = styled.span`
   font-weight: 500;
   &:hover {
     font-weight: 700;
+  }
+  @media screen and (max-width: 600px) {
+    display: none;
   }
 `;
 const CinemaDetails = (props: Props) => {
@@ -213,7 +225,7 @@ const CinemaDetails = (props: Props) => {
                 <CinemaInfo selectedCinemaAddress={selectedCinemaAddress} />
               </TabPanel>
               <TabPanel value={value} index={2}>
-                <CinemaRate />
+                <CinemaRate selectedCinemaAddress={selectedCinemaAddress} />
               </TabPanel>
             </WrappedTabItem>
           </Box>

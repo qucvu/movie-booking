@@ -8,7 +8,7 @@ const AvatarUser = (props: Props) => {
   const { infoUser } = useSelector((state: RootState) => state.auth);
 
   return (
-    <Stack p={5} direction="column" alignItems="center">
+    <Stack p={4} direction="column" alignItems="center" height="100%">
       <Box sx={{ borderRadius: "50%", overflow: "hidden" }}>
         <img
           src="https://i.pravatar.cc"

@@ -28,7 +28,7 @@ const InfoContent = (props: Props) => {
   }
 
   return (
-    <Container sx={{ mt: "5rem", py: 5, bgcolor: "paper.main" }}>
+    <Container sx={{ mt: "5rem", py: 3 }}>
       <Typography
         py={3}
         variant="h4"
@@ -41,8 +41,12 @@ const InfoContent = (props: Props) => {
         <Grid
           item
           xs={12}
-          sm={4}
-          sx={{ display: "flex", alignItems: "center" }}
+          sm={3}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
         >
           <AvatarUser />
         </Grid>

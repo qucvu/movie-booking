@@ -15,6 +15,7 @@ interface State {
   infoUser: InfoUser | null;
   isInfoUserLoading: boolean;
   errorInfoUser: string | null;
+  availableUser: boolean;
 }
 const initialState: State = {
   user: JSON.parse(localStorage.getItem("user") as string) || null,
@@ -25,6 +26,7 @@ const initialState: State = {
   infoUser: null,
   isInfoUserLoading: false,
   errorInfoUser: null,
+  availableUser: JSON.parse(localStorage.getItem("availableUser") as string),
 };
 
 export const loginUser = createAsyncThunk(
@@ -80,6 +82,16 @@ const authSlice = createSlice({
     logoutUser: (state) => {
       state.user = null;
       localStorage.setItem("user", JSON.stringify(null));
+      state.availableUser = false;
+      localStorage.setItem("availableUser", JSON.stringify(false));
+    },
+    setUnavailableUser: (state) => {
+      state.availableUser = false;
+      localStorage.setItem("availableUser", JSON.stringify(false));
+    },
+    setAvailableUser: (state) => {
+      state.availableUser = true;
+      localStorage.setItem("availableUser", JSON.stringify(true));
     },
   },
   extraReducers: (builder) => {
@@ -124,6 +136,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { logoutUser } = authSlice.actions;
+export const { logoutUser, setUnavailableUser, setAvailableUser } =
+  authSlice.actions;
 
 export default authSlice.reducer;

@@ -26,6 +26,13 @@ const StyledTab = styled(Tab)`
   &.Mui-selected {
     color: #fb4226;
   }
+  @media screen and (max-width: 600px) {
+    min-width: 100px;
+    font-size: 1rem;
+    &:hover {
+      font-size: 1.1rem;
+    }
+  }
 `;
 
 const WrappedTabItem = styled(Box)`

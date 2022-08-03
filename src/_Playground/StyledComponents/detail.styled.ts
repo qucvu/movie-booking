@@ -2,11 +2,7 @@ import { theme } from "GlobalStyles";
 import styled from "@emotion/styled";
 import { Typography } from "@mui/material";
 export const BgDetailBlur = styled.div`
-  background: linear-gradient(
-    to bottom,
-    #000,
-    ${theme.palette.paper.main} 100%
-  );
+  background: ${theme.palette.paper.main};
   /* filter: blur(10px);
   -webkit-filter: blur(10px); */
   /* height: 100%;
@@ -18,9 +14,10 @@ export const BgDetailBlur = styled.div`
 `;
 // Breadcrumb
 export const BreadcrumbText = styled(Typography)`
-  color: ${theme.palette.primary.contrastText};
+  color: ${theme.palette.secondary.contrastText};
+  font-weight: 500;
   &:hover {
-    color: ${theme.palette.secondary.light};
+    color: ${theme.palette.secondary.dark};
   }
 `;
 //Banner

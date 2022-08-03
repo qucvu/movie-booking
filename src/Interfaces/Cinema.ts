@@ -1,3 +1,5 @@
+import { User } from "./User";
+
 export interface CinemaSystem {
   lstCumRap: Cinema[];
   maHeThongRap: string;
@@ -46,4 +48,11 @@ export interface MovieClusterSystem {
   maHeThongRap: string;
   tenHeThongRap: string;
   logo: string;
+}
+
+export interface Review {
+  rate: number;
+  selectedCinemaAddress: Cinema;
+  user: User;
+  comment: string;
 }

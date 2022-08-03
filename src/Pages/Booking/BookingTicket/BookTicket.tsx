@@ -138,7 +138,8 @@ const BookTicket = (props: Props) => {
       <SweetAlertSuccess
         show={openSuccess}
         title="Đặt vé thành công!"
-        navigateDestination={"-1"}
+        text="Vui lòng kiểm tra trong lịch sử đặt vé "
+        navigateDestination={"/checkout"}
       />
     </div>
   );

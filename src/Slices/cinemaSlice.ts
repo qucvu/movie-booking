@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { Cinema, CinemaSystem } from "Interfaces/Cinema";
+import { Cinema, CinemaSystem, Review } from "Interfaces/Cinema";
 import CinemaAPI from "Services/cinemaAPI";
 interface State {
   cinemaSystems: CinemaSystem[];
   selectedCinema: CinemaSystem | null;
   isLoading: boolean;
   error: string | null;
+  reviews: Review[];
 }
 
 const initialState: State = {
@@ -13,6 +14,7 @@ const initialState: State = {
   selectedCinema: null,
   isLoading: false,
   error: null,
+  reviews: JSON.parse(localStorage.getItem("reviews") as string) || [],
 };
 
 export const getCinemaSystem = createAsyncThunk(
@@ -58,7 +60,12 @@ export const getCinemaDetails = createAsyncThunk(
 const cinemaSlice = createSlice({
   name: "cinema",
   initialState,
-  reducers: {},
+  reducers: {
+    addReview: (state, { payload }) => {
+      state.reviews.unshift(payload);
+      localStorage.setItem("reviews", JSON.stringify(state.reviews));
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getCinemaSystem.fulfilled, (state, { payload }) => {
       state.cinemaSystems = payload;
@@ -88,4 +95,6 @@ const cinemaSlice = createSlice({
     });
   },
 });
+
+export const { addReview } = cinemaSlice.actions;
 export default cinemaSlice.reducer;
