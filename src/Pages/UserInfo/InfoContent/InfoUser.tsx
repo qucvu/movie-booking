@@ -154,7 +154,7 @@ const InfoUser = (props: Props) => {
           color={errors.matKhau && !readOnly ? "warning" : "primary"}
           {...register("matKhau")}
           InputProps={{
-            readOnly: true,
+            readOnly: readOnly,
           }}
         />
         {!readOnly && errors.matKhau && (
